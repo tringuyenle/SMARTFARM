@@ -37,7 +37,6 @@
         <![endif]-->
     </head>
     <body>
-
         <div id="wrapper">
 
             <!-- Navigation -->
@@ -186,7 +185,7 @@
                                             <i class="fa fa-sun-o fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="huge">99 abc</div>
+                                            <div class="huge"><span id="nhietdopan"></span></div>
                                             <div>Ánh sáng</div>
                                         </div>
                                     </div>
@@ -664,6 +663,17 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="../js/startmin.js"></script>
+
+        <script>
+            getText("https://io.adafruit.com/api/v2/tringuyennek/feeds/led");
+            setInterval(function () {getText("https://io.adafruit.com/api/v2/tringuyennek/feeds/led");}, 1000);
+        
+            async function getText(url) {
+                let x = await fetch(url);
+                let y = await x.json();
+                document.getElementById("nhietdopan").innerHTML = y.last_value;
+            }
+        </script>
 
     </body>
 </html>
