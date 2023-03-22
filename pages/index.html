@@ -38,6 +38,34 @@
     </head>
     <body>
 
+<script>
+    const api_url = 
+      "https://io.adafruit.com/api/v2/tringuyennek/feeds/nhietdo";
+  
+    // Defining async function
+    async function getapi(url) {
+        
+        // Storing response
+        const response = await fetch(url);
+        
+        // Storing data in form of JSON
+        const data = await fetch(url).json();
+        console.log(data);
+        if (response) {
+            console.log("get data failed");
+        }
+        console.log(data.last_value);
+    }
+    // Calling that async function
+    // data = getapi(api_url);
+    var nhiet;
+    fetch("https://io.adafruit.com/api/v2/tringuyennek/feeds/nhietdo")
+        .then((response) => response.json())
+        .then((data) => nhiet = data);
+
+    console.log(nhiet)
+</script>
+
         <div id="wrapper">
 
             <!-- Navigation -->
