@@ -3,7 +3,7 @@ import time
 import sys
 from Adafruit_IO import MQTTClient
 
-AIO_FEED_ID = "led"
+AIO_FEED_ID = "anh-sang"
 AIO_USERNAME = "tringuyennek"
 AIO_KEY = "aio_kgAc827hGozCVrxabIaQOAdG5Rcs"
 
@@ -30,7 +30,16 @@ client.connect()
 client.loop_background()
 
 while True:
-    value = random.randint(0, 100)
-    print("Cap nhat:", value)
-    client.publish("nhietdo", value)
+    anhsang = random.randint(0, 100)
+    nhietdo = random.randint(0, 50)
+    dakk = random.randint(30, 70)
+    dad = random.randint(20, 80)
+    print("Cap nhat anh sang:", anhsang)
+    client.publish("anh-sang", anhsang)
+    print("Cap nhat nhiet do:", nhietdo)
+    client.publish("nhiet-do", nhietdo)
+    print("Cap nhat do am khong khi:", dakk)
+    client.publish("do-am-khong-khi", dakk)
+    print("Cap nhat do am dat:", dad)
+    client.publish("do-am-dat", dad)
     time.sleep(10)

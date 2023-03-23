@@ -1,17 +1,18 @@
+updateData("https://io.adafruit.com/api/v2/tringuyennek/feeds")
 
-// const feed = aio.feeds('nhietdo');
-function test() {
-    console.log("ok")
-    const AIO_KEY = 'aio_kgAc827hGozCVrxabIaQOAdG5Rcs';
-    const AIO_USERNAME = 'tringuyennek';
+async function fetch_api(url, idspam) {
+    let x = await fetch(url);
+    let y = await x.json();
+    document.getElementById(idspam).innerHTML = y.last_value;
+}
 
-    const aio = new AdafruitIO(AIO_USERNAME, AIO_KEY);
-    // Get the most recent value from the feed
-    const feed = aio.feeds.get('nhietdo');
-
-    feed.receive((data) => {
-      console.log(data);
-    });
-    
-    feed.stopReceive();
+async function updateData(url) {
+  fetch_api(url + "/anh-sang", "anh-sang");
+  fetch_api(url + "/nhiet-do", "nhiet-do");
+  fetch_api(url + "/do-am-khong-khi", "do-am-khong-khi");
+  fetch_api(url + "/do-am-dat", "do-am-dat");
+  setInterval(function () {fetch_api(url + "/anh-sang", "anh-sang"); fetch_api(url + "/nhiet-do", "nhiet-do"); fetch_api(url + "/do-am-khong-khi", "do-am-khong-khi"); fetch_api(url + "/do-am-dat", "do-am-dat");}, 1000);
+  // setInterval(function () {fetch_api(url + "/nhiet-do", "nhiet-do");}, 1000);
+  // setInterval(function () {fetch_api(url + "/do-am-khong-khi", "do-am-khong-khi");}, 1000);
+  // setInterval(function () {fetch_api(url + "/do-am-dat", "do-am-dat");}, 1000);
 }
