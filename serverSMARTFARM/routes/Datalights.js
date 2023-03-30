@@ -16,7 +16,7 @@ const delay = require('delay');
 // }
 router.get("/",async (req,res)=>{
      const Datalights = await Datalight.find()
-     res.json(Datalights[0])
+     res.json(Datalights)
     
 
 
