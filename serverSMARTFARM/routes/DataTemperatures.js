@@ -28,7 +28,6 @@ router.get("/",async (req,res)=>{
 })
 
 async function getDataTemperature(){
-    while(true){
         try{
             const myDataTemperature = await fetch("https://io.adafruit.com/api/v2/tringuyennek/feeds/nhiet-do")
             const res = await myDataTemperature.json()
@@ -70,10 +69,10 @@ async function getDataTemperature(){
             }
         }
         catch (e) { }
-    }
+    
     
 }
+setInterval(function () {getDataTemperature()}, 1000);
 
-getDataTemperature()
 
 module.exports = router;

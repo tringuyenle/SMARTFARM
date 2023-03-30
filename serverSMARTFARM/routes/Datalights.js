@@ -20,7 +20,6 @@ router.get("/",async (req,res)=>{
 })
 
 async function getDatalight(){
-    while(true){
         try{
             const myDatalight = await fetch("https://io.adafruit.com/api/v2/tringuyennek/feeds/anh-sang")
             const res = await myDatalight.json()
@@ -62,10 +61,10 @@ async function getDatalight(){
             }
         }
         catch (e) { }
-    }
+    
     
 }
-
-getDatalight()
+setInterval(function () {getDatalight()}, 1000);
+//getDatalight()
 
 module.exports = router;

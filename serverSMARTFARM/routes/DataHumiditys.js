@@ -30,7 +30,7 @@ router.get("/",async (req,res)=>{
 })
 
 async function getDataHumidity(){
-    while(true){
+
         try{
             const myDataHumidity = await fetch("https://io.adafruit.com/api/v2/tringuyennek/feeds/do-am-khong-khi")
             //const myDataHumidity = await fetch("https://www.facebook.com/")
@@ -73,10 +73,10 @@ async function getDataHumidity(){
             }
         }
         catch (e) { }
-    }
+    
     
 }
-
-getDataHumidity()
+setInterval(function () {getDataHumidity()}, 1000);
+//getDataHumidity()
 
 module.exports = router;

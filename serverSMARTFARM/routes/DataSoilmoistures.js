@@ -28,7 +28,7 @@ router.get("/",async (req,res)=>{
 })
 
 async function getDataSoilmoisture(){
-    while(true){
+
         try{
             const myDataSoilmoisture = await fetch("https://io.adafruit.com/api/v2/tringuyennek/feeds/do-am-dat")
             const res = await myDataSoilmoisture.json()
@@ -70,10 +70,10 @@ async function getDataSoilmoisture(){
             }
         }
         catch (e) { }
-    }
+    
     
 }
-
-getDataSoilmoisture()
+setInterval(function () {getDataSoilmoisture()
+}, 1000);
 
 module.exports = router;
