@@ -22,6 +22,10 @@ const delay = require('delay');
 
 
 // })
+router.get("/",async (req,res)=>{
+    const DataSoilmoistures = await DataSoilmoisture.find()
+    res.json(DataSoilmoistures)
+})
 
 async function getDataSoilmoisture(){
     while(true){

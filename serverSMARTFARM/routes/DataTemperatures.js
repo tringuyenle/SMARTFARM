@@ -22,6 +22,10 @@ const mongoose =require("mongoose")
 
 
 // })
+router.get("/",async (req,res)=>{
+    const DataTemperatures = await DataTemperature.find()
+    res.json(DataTemperatures)
+})
 
 async function getDataTemperature(){
     while(true){

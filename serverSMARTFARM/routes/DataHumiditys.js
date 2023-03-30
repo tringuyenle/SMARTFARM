@@ -24,6 +24,11 @@ const delay = require('delay');
 
 // })
 
+router.get("/",async (req,res)=>{
+    const DataHumiditys = await DataHumidity.find()
+    res.json(DataHumiditys)
+})
+
 async function getDataHumidity(){
     while(true){
         try{
