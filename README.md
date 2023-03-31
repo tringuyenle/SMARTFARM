@@ -7,5 +7,6 @@ $ git clone <link project>
   
     $ npm i
     $ npm start
+    ## Open local localhost:3000
 # Auto update Adafruit
     ## Open file AutoUpdateAdafruit.py and Run 
