@@ -176,15 +176,16 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <form role="form">
+                                            <form role="form" method="POST" action="/post-note">
                                                 <div class="form-group">
                                                     <label>Tiêu đề ghi chú</label>
-                                                    <input class="form-control">
+                                                    <input class="form-control" name="title_note">
                                                     <p class="help-block">*tiêu đề sẽ được dùng để nhận diện ghi chú</p>
+                                                    <p id="warn_title"></p>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Tóm tắt</label>
-                                                    <input class="form-control" placeholder="Enter text">
+                                                    <input class="form-control" placeholder="Enter text" name="summary_note">
                                                 </div>
 <!--                                                 <div class="form-group">
                                                     <label>Static Control</label>
@@ -196,7 +197,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Nội dung ghi chú</label>
-                                                    <textarea class="form-control" rows="3"></textarea>
+                                                    <textarea class="form-control" rows="3" name="content_note"></textarea>
                                                 </div>
 <!--                                                 <div class="form-group">
                                                     <label>Gán nhãn thông báo</label>
