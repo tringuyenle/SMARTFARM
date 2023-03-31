@@ -9,6 +9,11 @@ const mongoose =require("mongoose")
 
 const dbConn = mongoose.connect("mongodb+srv://ducvietha82:ducvietha82@cluster0.2t7itdx.mongodb.net/?retryWrites=true&w=majority")
 
+
+app.get("/DataNotes",async (req,res)=>{
+        const DataNotes = await DataNote.find()
+        res.json(DataNotes)
+    })
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({ extended: false }));
 app.post('/',function (req, res){
