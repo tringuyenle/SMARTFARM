@@ -6,6 +6,7 @@ const app = express()
 const bodyparser = require("body-parser")
 const router = express.Router();
 const mongoose =require("mongoose")
+// var popupS = require('popups');
 
 const dbConn = mongoose.connect("mongodb+srv://ducvietha82:ducvietha82@cluster0.2t7itdx.mongodb.net/?retryWrites=true&w=majority")
 
@@ -24,6 +25,9 @@ app.post('/',function (req, res){
                 Content: req.body.content_note
                 })
                 if((datanote.Title =="")|| (datanote.Summary =="")||(datanote.Content =="")){
+                        // popupS.alert({
+                        //         content: 'Chua nhap day du'
+                        //     });
                         res.send('Please enter all fields !!! ');
                 }
                 else {

@@ -57,7 +57,7 @@ async function getDataSoilmoisture(){
                 console.log(res['updated_at'])
                 console.log(res['last_value'])
                 const dataSoilmoisture = new DataSoilmoisture({
-                    ID_Soilmoisture_senser: "LSS1",
+                    ID_Soilmoisture_senser: "SSS1",
                     Name_Soilmoisture_sensor: "Soilmoisture_sensor1",
                     Status : "",
                     Value : res['last_value'],

@@ -1,3 +1,4 @@
+var CountinChart = 10
 
 const ctx = document.getElementById('myChart');
 var a = new Chart(ctx, {
@@ -8,7 +9,26 @@ var a = new Chart(ctx, {
       {
       label: 'Light',
       data: [],
-      borderWidth: 3
+      borderWidth: 3,
+      borderColor: '#0000FF',
+      },
+      {
+        label: 'Soilmoisture',
+        data: [],
+        borderWidth: 3,
+        borderColor: '#00FF00',
+      },
+      {
+        label: 'Humidity',
+        data: [],
+        borderWidth: 3,
+        borderColor: '#FFFF00',
+      },
+      {
+        label: 'Temperature',
+        data: [],
+        borderWidth: 3,
+        borderColor: '#FF0000',
       }
   ]
   },
@@ -20,33 +40,52 @@ var a = new Chart(ctx, {
     }
   }
 });
-function addData(chart, label, data) {
+function addData(chart, label, valueLight,valueHumidity,valueSoilmoisture,valueTemperature ) {
+
   chart.data.labels=label;
-  chart.data.datasets.forEach((dataset) => {
-      dataset.data=data;
-  });
+  chart.data.datasets[0].data = valueLight
+  chart.data.datasets[1].data = valueHumidity
+  chart.data.datasets[2].data = valueSoilmoisture
+  chart.data.datasets[3].data = valueTemperature
   chart.update();
+}
+
+function getdataFromDB(data){
+  res = []
+  var length = data.length
+  for(i=length-CountinChart;i<length;i++){
+    res.push(data[i]['Value'])
+  }
+  return res
 }
 async function getchart(){
 
-    var text =await fetch("http://localhost:3000/Datalights")
-    var listobj = await text.json()
-    lengthListObj = listobj.length
-    lengthobj = listobj[0].length
+    var Datalight =await fetch("http://localhost:3000/Datalights")
+    var DataHumidity = await fetch("http://localhost:3000/DataHumiditys")
+    var DataSoilmoisture = await fetch("http://localhost:3000/DataSoilmoistures")
+    var DataTemperature = await fetch("http://localhost:3000/DataTemperatures")
+
+    var listLight = await Datalight.json()
+    var listHumidity = await DataHumidity.json()
+    var listSoilmoisture = await DataSoilmoisture.json()
+    var listTemperature = await DataTemperature.json()
+    lengthListLight = listLight.length
+    lengthLight = listLight[0].length
     // fetch('http://localhost:3000/Datalights')
     //  .then(response => alert(response.json()[1]))
     time =[]
-    for(i=lengthListObj-10;i<lengthListObj;i++){
-      var timeof = new Date(listobj[i]['End_time'])
+    for(i=lengthListLight-CountinChart;i<lengthListLight;i++){
+      var timeof = new Date(listLight[i]['End_time'])
       var hoursAndmin = timeof.getHours()+":"+timeof.getMinutes() + ":" +timeof.getSeconds()
       time.push(hoursAndmin)
     }
 
-    value = []
-    for(i=lengthListObj-10;i<lengthListObj;i++){
-      value.push(listobj[i]['Value'])
-    }
-    addData(a,time,value)
+    valueLight = getdataFromDB(listLight)
+    valueHumidity = getdataFromDB(listHumidity)
+    valueSoilmoisture = getdataFromDB(listSoilmoisture)
+    valueTemperature = getdataFromDB(listTemperature)
+    
+    addData(a,time,valueLight,valueHumidity,valueSoilmoisture,valueTemperature)
 }
 setInterval(function () {getchart()}, 1000);
 //getchart();
