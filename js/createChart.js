@@ -1,4 +1,4 @@
-var CountinChart = 10
+var CountinChart = 30
 
 const ctx = document.getElementById('myChart');
 var a = new Chart(ctx, {
@@ -7,28 +7,32 @@ var a = new Chart(ctx, {
     labels: [],
     datasets: [
       {
-      label: 'Light',
-      data: [],
-      borderWidth: 3,
-      borderColor: '#0000FF',
+        label: 'Light',
+        data: [],
+        borderWidth: 3,
+        borderColor: '#0000FF',
+        tension: 0.4
       },
       {
         label: 'Soilmoisture',
         data: [],
         borderWidth: 3,
         borderColor: '#00FF00',
+        tension: 0.4
       },
       {
         label: 'Humidity',
         data: [],
         borderWidth: 3,
         borderColor: '#FFFF00',
+        tension: 0.4
       },
       {
         label: 'Temperature',
         data: [],
         borderWidth: 3,
         borderColor: '#FF0000',
+        tension: 0.4
       }
   ]
   },
