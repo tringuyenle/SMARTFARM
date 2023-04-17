@@ -115,7 +115,7 @@
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> secondtruth <b class="caret"></b>
+                            <i class="fa fa-user fa-fw"></i> user <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -188,7 +188,7 @@
                                         </div>
                                         <div class="col-xs-9 text-right">
                                             <div class="huge"><span id="anh-sang"></span>%</div>
-                                            <div>Ánh sáng</div>
+                                            <div>Ánh sáng<div style="height:8px;"></div></div>
                                         </div>
                                     </div>
                                 </div>
@@ -222,7 +222,7 @@
                                         </div>
                                         <div class="col-xs-9 text-right">
                                             <div class="huge"><span id="do-am-dat"></span>%</div>
-                                            <div>Độ ẩm đất</div>
+                                            <div>Độ ẩm đất<div style="height:8px;"></div></div>
                                         </div>
                                     </div>
                                 </div>
@@ -255,7 +255,7 @@
                                         </div>
                                         <div class="col-xs-9 text-right">
                                             <div class="huge"><span id="do-am-khong-khi"></span>%</div>
-                                            <div>Độ ẩm không khí</div>
+                                            <div>Độ ẩm không khí<div style="height:8px;"></div></div>
                                         </div>
                                     </div>
                                 </div>
@@ -288,7 +288,15 @@
                                         </div>
                                         <div class="col-xs-9 text-right">
                                             <div class="huge"><span id="nhiet-do"></span>°C</div>
-                                            <div>Nhiệt độ</div>
+                                            <span>Nhiệt độ</span>
+                                            <button id="drop-btn">Xem thêm</button>
+                                            <div class="trung-dropdown" id="temp-dropdown">
+                                                <select id="drop-content">
+                                                    <option value="1">Chế độ Quạt 1</option>
+                                                    <option value="2">Chế độ Quạt 2</option>
+                                                    <option value="3">Chế độ Quạt 3</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -298,11 +306,7 @@
                                         <input type="checkbox">
                                         <span class="slider round"></span>
                                         </label>
-
-                                        <style>
-                                        </style>
                                         <span class="pull-right">Chế độ thủ công</span>
-
                                         <div class="clearfix"></div>
                                     </div>
                                 </a>
@@ -683,6 +687,7 @@
         <script src="../js/createChart.js"></script>
         <script src="../js/displayNote.js"></script>
         <script src="../js/displayWarning.js"></script>
+        <script src="../js/threemode.js"></script>
         
     </body>
 </html>
