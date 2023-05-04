@@ -28,7 +28,9 @@ body {
 }
 
 .navbar-header {
+    padding-left: 3rem;
     float: left;
+    display: flex;
 }
 
 .navbar-left {
