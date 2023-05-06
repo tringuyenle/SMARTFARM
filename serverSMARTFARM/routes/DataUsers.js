@@ -1,31 +1,41 @@
-const express = require('express');
-const res = require("express/lib/response")
-const router = express.Router();
-const fetch = require('node-fetch')
+
 const DataUser = require("../model/DataUser")
+const path=require('path')
+const formpath = path.resolve(__dirname,'../../')
+const express = require("express")
 const app = express()
+const bodyparser = require("body-parser")
+const router = express.Router();
 const mongoose =require("mongoose")
 
-
-// async function getText(url) {
-                
-//     let x = await fetch(url);
-//     y = await x.json();
-//     return y
-
-// }
-// router.get("/",async (req,res)=>{
-//     // const DataTemperatures = await DataTemperature.find()
-//     // res.json(DataTemperatures)
+const dbConn = mongoose.connect("mongodb+srv://ducvietha82:ducvietha82@cluster0.2t7itdx.mongodb.net/?retryWrites=true&w=majority")
+app.get("/",async (req,res)=>{
+        const DataUsers = await DataUser.find()
+        res.json(DataUsers)
+    })
     
-//     getText("https://io.adafruit.com/api/v2/tringuyennek/feeds/led").then(obj => res.json(obj))
+app.use(bodyparser.json())
+app.use(bodyparser.urlencoded({ extended: false }));
 
+app.post('/',function (req, res){
 
-// })
-router.get("/",async (req,res)=>{
-    const DataUsers = await DataUser.find()
-    res.json(DataUsers)
+        dbConn.then(function(db) {
+                const datauser = new DataUser({
+                    Name: req.body.name,
+                    Username: req.body.username,
+                    Password: req.body.password,
+                })
+                if((datauser.Name !="") && (datauser.Username !="")&&(datauser.Password !="")){
+                        // popupS.alert({
+                        //         content: 'Chua nhap day du'
+                        //     });
+                        datauser.save()
+                        res.redirect('../../pages/login.html');
+                }
+        });    
+                
+  
+            //res.send('Data received:\n' + JSON.stringify(req.body));
 })
-
-
-module.exports = router;
+app.use(express.static(formpath))
+module.exports = app;

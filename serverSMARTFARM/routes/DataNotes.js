@@ -6,10 +6,8 @@ const app = express()
 const bodyparser = require("body-parser")
 const router = express.Router();
 const mongoose =require("mongoose")
-// var popupS = require('popups');
 
 const dbConn = mongoose.connect("mongodb+srv://ducvietha82:ducvietha82@cluster0.2t7itdx.mongodb.net/?retryWrites=true&w=majority")
-
 
 app.get("/DataNotes",async (req,res)=>{
         const DataNotes = await DataNote.find()

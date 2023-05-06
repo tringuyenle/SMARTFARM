@@ -39,7 +39,7 @@
                             <h3 class="panel-title">Please Sign Up</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form" id="login-form">
+                            <form role="form" id="res-form" method="POST" action="/DataUsers">
                                 <fieldset>
                                     <div class="form-group">
                                         <input class="form-control" placeholder="Name" name="name" id="name" type="text" value="">
@@ -50,10 +50,11 @@
                                     <div class="form-group">
                                         <input class="form-control" placeholder="Password" name="password" id="password" type="password" value="">
                                     </div>
-                                    <a href="login.html">Have acount? Sign In</a>
+                                    <a href="login.html">Have account? Sign In</a>
                                     <!-- Change this to a button or input when using this as a form -->
-                                    <button type="submit" class="btn btn-lg btn-success btn-block">Register</button>
                                 </fieldset>
+                                <button type="submit" onclick=checkres() class="btn btn-lg btn-success btn-block">Register</button>
+
                             </form>
                         </div>
                     </div>
@@ -72,6 +73,21 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="../js/startmin.js"></script>
+        <script>
+            function checkres() {
+                let name = document.getElementById("name").value
+                let username = document.getElementById("username").value
+                let password = document.getElementById("password").value
+
+                if(name =="" || username=="" || password ==""){
+                    alert("Hãy nhập đầy đủ")
+                }
+                else{
+                    alert("Đăng kí thành công")
+                    window.location.href = "login.html"
+                }
+            }
+        </script>
 
     </body>
 </html>
