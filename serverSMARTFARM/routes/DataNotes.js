@@ -22,7 +22,8 @@ app.post('/',function (req, res){
                 const datanote= new DataNote({
                 Title:req.body.title_note,
                 Summary: req.body.summary_note,
-                Content: req.body.content_note
+                Content: req.body.content_note,
+                Tag: req.body.option
                 })
                 if((datanote.Title !="") && (datanote.Summary !="")&&(datanote.Content !="")){
                         // popupS.alert({
