@@ -38,10 +38,10 @@ async function displayTableData(){
         
         time = new Date(listLight[lengthListLight-i]['End_time'])
         tdTime.innerHTML =time.getDay() +"/"+ time.getMonth() + "/"+ time.getFullYear()+ "-" +time.getHours() +":"+ time.getMinutes()
-        tdDatalight.innerHTML = listLight[lengthListLight-i]['Value']
-        tdDataHumidity.innerHTML = listHumidity[lengthlistHumidity-i]['Value']
-        tdDataSoilmoisture.innerHTML = listSoilmoisture[lengthlistSoilmoisture-i]['Value']
-        tdDataTemperature.innerHTML = listTemperature[lengthlistTemperature-i]['Value']
+        tdDatalight.innerHTML = listLight[lengthListLight-i].Value
+        tdDataHumidity.innerHTML = listHumidity[lengthlistHumidity-i].Value
+        tdDataSoilmoisture.innerHTML = listSoilmoisture[lengthlistSoilmoisture-i].Value
+        tdDataTemperature.innerHTML = listTemperature[lengthlistTemperature-i].Value
 
 
     }

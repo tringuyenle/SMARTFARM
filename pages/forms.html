@@ -154,13 +154,13 @@
                                             <form role="form" method="POST" action="/post-note">
                                                 <div class="form-group">
                                                     <label>Tiêu đề ghi chú</label>
-                                                    <input class="form-control" name="title_note">
+                                                    <input class="form-control" name="title_note"  id="title_note">
                                                     <p class="help-block">*tiêu đề sẽ được dùng để nhận diện ghi chú</p>
                                                     <p id="warn_title"></p>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Tóm tắt</label>
-                                                    <input class="form-control" placeholder="Enter text" name="summary_note">
+                                                    <input class="form-control" placeholder="Enter text" name="summary_note" id="summary_note">
                                                 </div>
 <!--                                                 <div class="form-group">
                                                     <label>Static Control</label>
@@ -172,7 +172,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Nội dung ghi chú</label>
-                                                    <textarea class="form-control" rows="3" name="content_note"></textarea>
+                                                    <textarea class="form-control" rows="3" name="content_note" id="content_note"></textarea>
                                                 </div>
 <!--                                                 <div class="form-group">
                                                     <label>Gán nhãn thông báo</label>
@@ -252,7 +252,7 @@
                                                         <option>5</option>
                                                     </select>
                                                 </div> -->
-                                                <button type="submit" class="btn btn-default">Lưu Ghi Chú</button>
+                                                <button type="submit" onclick=checknote() class="btn btn-default">Lưu Ghi Chú</button>
                                                 <button type="reset" class="btn btn-default">Xóa Các Trường Đã Nhập</button>
                                             </form>
                                         </div>
@@ -353,6 +353,19 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="../js/startmin.js"></script>
+        <script >
+            function checknote(){
+                let title_note = document.getElementById("title_note").value
+                let summary_note = document.getElementById("summary_note").value
+                let content_note = document.getElementById("content_note").value
+                if(title_note =="" || summary_note =="" || content_note==""){
+                    alert("Hãy nhập đầy đủ")
+                }
+                else{
+                    alert("Lưu ghi chú thành công")
 
+                }
+            }
+        </script>
     </body>
 </html>

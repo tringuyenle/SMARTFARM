@@ -1,26 +1,52 @@
-const warnHightLight = 70
-const warnLowLight = 10
-const warnHightHumidity = 40
-const warnLowHumidity = 20
-const warnHightSoilmoisture = 40
-const warnLowSoilmoisture = 20
-const warnHightTemperature = 40
-const warnLowTemperature = 20
+minLight = 10
+maxLight = 70
+
+minHum = 10
+maxHum = 50
+
+minTem = 15
+maxTem = 35
+
+minSoi = 10
+maxSoi = 50
+
+function addchill(list_Warn, thoigian, minOrmax, type){
+    var name = type + " " + minOrmax
+    var div = document.createElement("div")
+    div.className = type + " " + minOrmax
+    var a = document.createElement("a")
+    a.className = "list-group-item"
+    var i = document.createElement("i")
+    i.className="fa fa-warning fa-fw"
+    
+    var spanTB = document.createElement("span")
+    spanTB.innerHTML= type + " " + minOrmax
+    var span = document.createElement("span")
+    span.className = "pull-right text-muted small"
 
 
-function warning(childClassWarning){
-        var att = document.createAttribute("class")
-        att.value = "alert alert-danger"
-        childClassWarning.setAttributeNode(att)
-        childClassWarning.innerHTML = "Warning: Hight Light"
+    span.innerHTML = "vai phut truoc"
 
-        var att1 = document.createAttribute("class")
-        att1.value = "alert alert-warning"
-        childClassWarning.setAttributeNode(att)
+    a.appendChild(i)
+    a.appendChild(spanTB)
+    a.appendChild(span)
+    
+    div.appendChild(a)
+    chill_List = list_Warn.children
+    lenChillList = chill_List.length
+
+    let checkadd = true
+    for( i=0;i<length;i++){
+        if(chill_List[i].className ==(type + " " + minOrmax) ){
+            checkadd = false
+            break
+        }
+    }
+    if(checkadd){
+        list_Warn.appendChild(div)
+    }
 }
-
-
-async function displayTableData(){
+async function displayWarn(){
     var Datalight =await fetch("http://localhost:3000/Datalights")
     var DataHumidity = await fetch("http://localhost:3000/DataHumiditys")
     var DataSoilmoisture = await fetch("http://localhost:3000/DataSoilmoistures")
@@ -36,92 +62,32 @@ async function displayTableData(){
     var lengthlistSoilmoisture = listSoilmoisture.length
     var lengthlistTemperature = listTemperature.length
 
-    var getClassWarning = document.getElementsByClassName("displayWarning")
-    
-    for(i=0;i<getClassWarning.length;i++){
-        var childClassWarning = getClassWarning[i].children
-        if(i==0){
-            if(listLight[lengthListLight-1]['Value'] > warnHightLight){
-                var att = document.createAttribute("class")
-                att.value = "alert alert-danger"
-                childClassWarning[0].setAttributeNode(att)
-                childClassWarning[0].innerHTML = "Warning: Hight Light"
-            }
-            else if(listLight[lengthListLight-1]['Value'] < warnLowLight){
-                var att = document.createAttribute("class")
-                att.value = "alert alert-danger"
-                childClassWarning[0].setAttributeNode(att)
-                childClassWarning[0].innerHTML = "Warning: Low Light"
-            }
-            else{
-                var att = document.createAttribute("class")
-                att.value = "alert alert-success"
-                childClassWarning[0].setAttributeNode(att)
-                childClassWarning[0].innerHTML = "OK"
-            }
-        }
-        if(i==1){
-            if(listSoilmoisture[lengthlistSoilmoisture-1]['Value'] > warnHightSoilmoisture){
-                var att = document.createAttribute("class")
-                att.value = "alert alert-danger"
-                childClassWarning[0].setAttributeNode(att)
-                childClassWarning[0].innerHTML = "Warning: Hight Soilmoisture"
-                
-            }
-            else if(listSoilmoisture[lengthlistSoilmoisture-1]['Value'] < warnLowSoilmoisture){
-                var att = document.createAttribute("class")
-                att.value = "alert alert-danger"
-                childClassWarning[0].setAttributeNode(att)
-                childClassWarning[0].innerHTML = "Warning: Low Soilmoisture"
-            }
-            else{
-                var att = document.createAttribute("class")
-                att.value = "alert alert-success"
-                childClassWarning[0].setAttributeNode(att)
-                childClassWarning[0].innerHTML = "OK"
-            }
-        }
-        if(i==2){
-            if(listHumidity[lengthlistHumidity-1]['Value'] > warnHightHumidity){
-                var att = document.createAttribute("class")
-                att.value = "alert alert-danger"
-                childClassWarning[0].setAttributeNode(att)
-                childClassWarning[0].innerHTML = "Warning: Hight Humidity"
-            }
-            else if(listHumidity[lengthlistHumidity-1]['Value'] < warnLowHumidity){
-                var att = document.createAttribute("class")
-                att.value = "alert alert-danger"
-                childClassWarning[0].setAttributeNode(att)
-                childClassWarning[0].innerHTML = "Warning: Low Humidity"
-            }
-            else{
-                var att = document.createAttribute("class")
-                att.value = "alert alert-success"
-                childClassWarning[0].setAttributeNode(att)
-                childClassWarning[0].innerHTML = "OK"
-            }
-        }
-        if(i==3){
-            if(listTemperature[lengthlistTemperature-1]['Value'] > warnHightTemperature){
-                var att = document.createAttribute("class")
-                att.value = "alert alert-danger"
-                childClassWarning[0].setAttributeNode(att)
-                childClassWarning[0].innerHTML = "Warning: Hight Temperature"
-            }
-            else if(listTemperature[lengthlistTemperature-1]['Value'] < warnLowTemperature){
-                var att = document.createAttribute("class")
-                att.value = "alert alert-danger"
-                childClassWarning[0].setAttributeNode(att)
-                childClassWarning[0].innerHTML = "Warning: Low Temperature"
-            }
-            else{
-                var att = document.createAttribute("class")
-                att.value = "alert alert-success"
-                childClassWarning[0].setAttributeNode(att)
-                childClassWarning[0].innerHTML = "OK"
-            }
-        }
+    listWarn = document.getElementById("list_Warn")
+    if(listLight[lengthListLight-1].Value < minLight){
+        addchill(listWarn, "", "duoi nguong", "Anh sang")
     }
-    
+    if(listLight[lengthListLight-1].Value > maxLight){
+        addchill(listWarn, "", "vuot nguong", "Anh sang")
+    }
+    if(listHumidity[lengthlistHumidity-1].Value < minHum){
+        addchill(listWarn, "", "duoi nguong", "Do am khong khi")
+    }
+    if(listHumidity[lengthlistHumidity-1].Value > maxHum){
+        addchill(listWarn, "", "vuot nguong", "Do am khong khi")
+    }
+    if(listSoilmoisture[lengthlistSoilmoisture-1].Value < minSoi){
+        addchill(listWarn, "", "duoi nguong", "Do am dat")
+    }
+    if(listSoilmoisture[lengthlistSoilmoisture-1].Value > maxSoi){
+        addchill(listWarn, "", "vuot nguong", "Do am dat")
+    }
+    if(listTemperature[lengthlistTemperature-1].Value < minTem){
+        addchill(listWarn, "", "duoi nguong", "Nhiet do")
+    }
+    if(listTemperature[lengthlistTemperature-1].Value > maxTem){
+        addchill(listWarn, "", "vuot nguong", "Nhiet do")
+    }
+
 }
-setInterval(function () {displayTableData()}, 1000);
+//setInterval(function () {displayWarn()}, 1000);
+displayWarn()

@@ -24,16 +24,11 @@ app.post('/',function (req, res){
                 Summary: req.body.summary_note,
                 Content: req.body.content_note
                 })
-                if((datanote.Title =="")|| (datanote.Summary =="")||(datanote.Content =="")){
+                if((datanote.Title !="") && (datanote.Summary !="")&&(datanote.Content !="")){
                         // popupS.alert({
                         //         content: 'Chua nhap day du'
                         //     });
-                        res.send('Please enter all fields !!! ');
-                }
-                else {
                         datanote.save()
-                        res.send('Note data has been saved. Data received:\n' + JSON.stringify(req.body));
-                        //res.send('Data received:\n' + JSON.stringify(req.body));
                 }
         });    
                 
