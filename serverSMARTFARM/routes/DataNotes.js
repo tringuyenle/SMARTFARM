@@ -6,10 +6,8 @@ const app = express()
 const bodyparser = require("body-parser")
 const router = express.Router();
 const mongoose =require("mongoose")
-// var popupS = require('popups');
 
 const dbConn = mongoose.connect("mongodb+srv://ducvietha82:ducvietha82@cluster0.2t7itdx.mongodb.net/?retryWrites=true&w=majority")
-
 
 app.get("/DataNotes",async (req,res)=>{
         const DataNotes = await DataNote.find()
@@ -22,7 +20,8 @@ app.post('/',function (req, res){
                 const datanote= new DataNote({
                 Title:req.body.title_note,
                 Summary: req.body.summary_note,
-                Content: req.body.content_note
+                Content: req.body.content_note,
+                Tag: req.body.option
                 })
                 if((datanote.Title !="") && (datanote.Summary !="")&&(datanote.Content !="")){
                         // popupS.alert({

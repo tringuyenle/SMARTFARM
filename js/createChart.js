@@ -9,28 +9,28 @@ var a = new Chart(ctx, {
       {
         label: 'Light',
         data: [],
-        borderWidth: 3,
+        borderWidth: 1.5,
         borderColor: '#0000FF',
         tension: 0.4
       },
       {
         label: 'Soilmoisture',
         data: [],
-        borderWidth: 3,
+        borderWidth: 1.5,
         borderColor: '#00FF00',
         tension: 0.4
       },
       {
         label: 'Humidity',
         data: [],
-        borderWidth: 3,
+        borderWidth: 1.5,
         borderColor: '#FFFF00',
         tension: 0.4
       },
       {
         label: 'Temperature',
         data: [],
-        borderWidth: 3,
+        borderWidth: 1.5,
         borderColor: '#FF0000',
         tension: 0.4
       }
