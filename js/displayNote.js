@@ -1,6 +1,13 @@
+var soluong = 3;
+function xemthem(){
+    soluong++;
+}
+function rutngan(){
+    soluong--;
+}
 function createNote(listNote, title_note, content_note, option_note, stt){
     let li = document.createElement("li")
-    if(stt==1){
+    if(stt%2==1){
         li.className="timeline-inverted"
     }
     let div1 = document.createElement("div")
@@ -54,15 +61,14 @@ async function displayNote(){
     
     var listNote = document.getElementById("listNote")
     lengthchild = listNote.childElementCount
-    if(lengthchild==3){
+    for( i =0; i <lengthchild; i++){
         listNote.removeChild(listNote.lastChild)
-        listNote.removeChild(listNote.lastChild)
-        listNote.removeChild(listNote.lastChild)
+
     }
 
     index = 0;
 
-    for(i = lengthListObj-1; i >lengthListObj -4; i-- ){
+    for(i = lengthListObj-1; i >lengthListObj -soluong-1; i-- ){
         //listNote.removeChild(listNote.lastChild)
         createNote(listNote, listobj[i].Title, listobj[i].Content, listobj[i].Tag, index)
         index++
