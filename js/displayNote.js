@@ -1,8 +1,17 @@
 var soluong = 3;
-function xemthem(){
+async function xemthem(){
+    var listNote = document.getElementById("listNote")
+    var text =await fetch("http://localhost:3000/post-note/DataNotes")
+    var listobj = await text.json()
+    lengthListObj = listobj.length
     soluong++;
+    
+    createNote(listNote,listobj[lengthListObj-soluong].Title, listobj[lengthListObj-soluong].Content, listobj[lengthListObj-soluong].Tag, soluong-1)
 }
 function rutngan(){
+    var listNote = document.getElementById("listNote")
+    listNote.removeChild(listNote.lastChild)
+
     soluong--;
 }
 function createNote(listNote, title_note, content_note, option_note, stt){
@@ -61,10 +70,10 @@ async function displayNote(){
     
     var listNote = document.getElementById("listNote")
     lengthchild = listNote.childElementCount
-    for( i =0; i <lengthchild; i++){
+    /*for( i =0; i <lengthchild; i++){
         listNote.removeChild(listNote.lastChild)
 
-    }
+    }*/
 
     index = 0;
 
@@ -77,5 +86,5 @@ async function displayNote(){
     
 }
 
-//displayNote()
-setInterval(function () {displayNote()}, 1000);
+displayNote()
+//setInterval(function () {displayNote()}, 1000);
