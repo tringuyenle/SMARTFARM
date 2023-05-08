@@ -25,17 +25,45 @@ app.post('/',function (req, res){
                     Username: req.body.username,
                     Password: req.body.password,
                 })
-                if((datauser.Name !="") && (datauser.Username !="")&&(datauser.Password !="")){
-                        // popupS.alert({
-                        //         content: 'Chua nhap day du'
-                        //     });
-                        datauser.save()
-                        res.redirect('../../pages/login.html');
+                if((datauser.Name) && (datauser.Username)&&(datauser.Password)){
+                        if((datauser.Name !="") && (datauser.Username !="")&&(datauser.Password !="")){
+                                // popupS.alert({
+                                //         content: 'Chua nhap day du'
+                                //     });
+                                datauser.save()
+                                res.redirect('../../pages/login.html');
+                        }
                 }
+
+
+                
         });    
                 
   
             //res.send('Data received:\n' + JSON.stringify(req.body));
 })
+
+app.post("/update", async function (req, res){
+        const username = req.body.username
+        const nameUser = req.body.nameUser
+        try {
+                const updatedUser = await DataUser.findOneAndUpdate(
+                  { Username: username },
+                  { Name: nameUser },
+                  { new: true }
+                );
+            
+                if (!updatedUser) {
+                  res.status(404).send('User not found');
+                  return;
+                }
+            
+                res.redirect('../../pages/profile.html');
+              } catch (err) {
+                console.error(err);
+                res.status(500).send('Internal server error');
+              }
+})
+
 app.use(express.static(formpath))
 module.exports = app;

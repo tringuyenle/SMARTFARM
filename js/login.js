@@ -1,8 +1,11 @@
+
+var username=""
+var password=""
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    username = document.getElementById('username').value;
+    password = document.getElementById('password').value;
 
     fetch('http://localhost:3000/DataUsers/')
     .then(response => response.json()) 
@@ -10,6 +13,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         const user = users.find(u => u.Username === username && u.Password === password);
 
         if (user) {
+            sessionStorage.setItem('user', JSON.stringify(user));
         window.location.href = 'http://localhost:3000/pages/index.html';
         } else {
         alert('Invalid username or password.');
