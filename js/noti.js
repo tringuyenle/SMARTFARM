@@ -24,7 +24,7 @@ function sendNotificationToScreen(mainMsg){
     i.className="fa fa-warning fa-fw"
     
     var spanTB = document.createElement("span")
-    spanTB.innerHTML= " ID thiết bị:" + msgArr[0] + "   " + msgArr[1];
+    spanTB.innerHTML= " ID:" + msgArr[0] + "   " + msgArr[1];
     var span = document.createElement("span")
     span.className = "pull-right text-muted small"
 
@@ -39,20 +39,14 @@ function sendNotificationToScreen(mainMsg){
     chill_List = list_Warn.children
     lenChillList = chill_List.length
 
-    if(list_Warn.childElementCount > 5) {
+    if(list_Warn.childElementCount > 4) {
         list_Warn.innerHTML = ''; // clear list
     }
 
-    // let checkadd = true
-    // for( i=0;i<length;i++){
-    //     if(chill_List[i].className == 'wa'){
-    //         checkadd = false
-    //         break
-    //     }
-    // }
-    // if(checkadd){
-        list_Warn.appendChild(div)
-    // }
+    if(list_Warn.childElementCount === 0) {
+        list_Warn.appendChild(div);
+    }
+    else { list_Warn.insertBefore(div,list_Warn.children[0]); }
 }
 
 async function getObjectDataFromServer(endpoint) {
@@ -69,7 +63,7 @@ async function getObjectDataFromServer(endpoint) {
 async function checkParamaterAndSendNoti() {
     let objectData = null;
 
-    objectData = await getObjectDataFromServer('DataTemperature')
+    objectData = await getObjectDataFromServer('DataTemperatures')
     // objectData = {ID_Temperature_senser:"8113132",Value:"13",Status:"Failed",End_time:"6-9-1969"}
     sendNotificationToScreen( generateMessagesFromObject(objectData, 'Temperature') );
 
@@ -77,8 +71,8 @@ async function checkParamaterAndSendNoti() {
     // objectData = {ID_Humidity_senser:"8091832",Value:"69",Status:"OK",End_time:"6-9-1996"}
     sendNotificationToScreen( generateMessagesFromObject(objectData, 'Humidity') );
 
-    objectData = await getObjectDataFromServer('DataSoilmoistures');
-    sendNotificationToScreen( generateMessagesFromObject(objectData, 'Soilmoisture') );
+    // objectData = await getObjectDataFromServer('DataSoilmoistures');
+    // sendNotificationToScreen( generateMessagesFromObject(objectData, 'Soilmoisture') );
 
     objectData = await getObjectDataFromServer('Datalights');
     // objectData = {ID_Light_senser:"814141832",Value:"0",Status:"OK",End_time:"6-9-1966"}
@@ -120,9 +114,9 @@ function generateMessagesFromObject(objectData, objectString) {
         }
         else if(objectString === 'Light') {
             mainMsg = (valueFromObj < LIGHT_THRESHOLD[0]) ?
-            "Cảnh Báo Ánh Sáng Dưới Ngưỡng" :
+            "Cảnh Báo Độ Sáng Dưới Ngưỡng" :
             (valueFromObj > LIGHT_THRESHOLD[1]) ?
-            "Cảnh Báo Ánh Sáng Vượt Ngưỡng" : null;
+            "Cảnh Báo Độ Sáng Vượt Ngưỡng" : null;
         }
 
         return mainMsg;
@@ -140,12 +134,19 @@ function generateMessagesFromObject(objectData, objectString) {
     return objectData[propID] +"__"+ mainMsg +"__"+ objectData[propEndTime]
 }
 
-// obj1 = {ID_Humidity_senser:"8091832",Value:"69",Status:"OK",End_time:"6-9-1996"}
-// obj2 = {ID_Temperature_senser:"8113132",Value:"13",Status:"Failed",End_time:"6-9-1969"}
-// obj3 = {ID_Light_senser:"814141832",Value:"0",Status:"OK",End_time:"6-9-1966"}
+var repeatTask = window.setInterval(checkParamaterAndSendNoti,2000);//2 giay cap nhat thong bao 1 lan
+var intervalSet = true;
+var togWarnBut = document.getElementById('toggle-warn');
 
-// console.log(generateMessagesFromObject(obj1, 'Humidity'))
-// console.log(generateMessagesFromObject(obj2, 'Temperature'))
-// console.log(generateMessagesFromObject(obj3, 'Light'))
-
-setTimeOut(2000,checkParamaterAndSendNoti);//2 giay cap nhat thong bao 1 lan
+togWarnBut.addEventListener('click', () => {
+    if(!window.intervalSet) {
+        window.repeatTask = window.setInterval(checkParamaterAndSendNoti,2000);//2 giay cap nhat thong bao 1 lan
+        window.intervalSet = true;
+        togWarnBut.innerText = 'Tắt Thông Báo';
+    }
+    else {
+        window.clearInterval(window.repeatTask);
+        window.intervalSet = false;
+        togWarnBut.innerText = 'Bật Thông Báo';
+    }
+});
