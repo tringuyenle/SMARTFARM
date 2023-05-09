@@ -21,7 +21,9 @@ app.post('/',function (req, res){
                 Title:req.body.title_note,
                 Summary: req.body.summary_note,
                 Content: req.body.content_note,
-                Tag: req.body.option
+                Tag: req.body.option,
+                Time: req.body.setdaytime
+
                 })
                 if((datanote.Title !="") && (datanote.Summary !="")&&(datanote.Content !="")){
                         // popupS.alert({
