@@ -20,5 +20,12 @@ function hidebtn (status) {
     }
 }
 
+function fancontrol() {
+    speech = document.getElementById('fanspeech').innerHTML
+    if (speech == 1) document.getElementById('fanspeech').innerHTML = 2
+    else if (speech == 2) document.getElementById('fanspeech').innerHTML = 3
+    else document.getElementById('fanspeech').innerHTML = 1
+    console.log(speech)
+}
 
 
