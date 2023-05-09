@@ -39,14 +39,14 @@ function sendNotificationToScreen(mainMsg){
     chill_List = list_Warn.children
     lenChillList = chill_List.length
 
-    if(list_Warn.childElementCount > 4) {
-        list_Warn.innerHTML = ''; // clear list
+    while(list_Warn.childElementCount > 4) {
+        list_Warn.removeChild(list_Warn.lastElementChild); // clear list
     }
 
     if(list_Warn.childElementCount === 0) {
         list_Warn.appendChild(div);
     }
-    else { list_Warn.insertBefore(div,list_Warn.children[0]); }
+    else { list_Warn.insertBefore(div,list_Warn.firstElementChild); }
 }
 
 async function getObjectDataFromServer(endpoint) {
