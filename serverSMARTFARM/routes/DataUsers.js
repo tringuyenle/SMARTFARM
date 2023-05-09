@@ -24,6 +24,8 @@ app.post('/',function (req, res){
                     Name: req.body.name,
                     Username: req.body.username,
                     Password: req.body.password,
+                    Email: "",
+                    Description: "",
                 })
                 if((datauser.Name) && (datauser.Username)&&(datauser.Password)){
                         if((datauser.Name !="") && (datauser.Username !="")&&(datauser.Password !="")){
@@ -46,10 +48,15 @@ app.post('/',function (req, res){
 app.post("/update", async function (req, res){
         const username = req.body.username
         const nameUser = req.body.nameUser
+        const emailUser = req.body.emailUser
+        const des = req.body.description
         try {
                 const updatedUser = await DataUser.findOneAndUpdate(
                   { Username: username },
-                  { Name: nameUser },
+                  { Name: nameUser,
+                    Email: emailUser,
+                    Description: des,
+                  },
                   { new: true }
                 );
             
