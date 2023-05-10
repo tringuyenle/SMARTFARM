@@ -27,14 +27,14 @@ async function displayTableData(){
         var tdDataHumidity = document.createElement("td")
         var tdDataSoilmoisture = document.createElement("td")
         var tdDataTemperature = document.createElement("td")
-        var tdWarning = document.createElement("td")
+        // var tdWarning = document.createElement("td")
         
         tr.appendChild(tdTime)
         tr.appendChild(tdDataSoilmoisture)
         tr.appendChild(tdDataHumidity)
         tr.appendChild(tdDatalight)
         tr.appendChild(tdDataTemperature)
-        tr.appendChild(tdWarning)
+        // tr.appendChild(tdWarning)
         
         time = new Date(listLight[lengthListLight-i]['End_time'])
         tdTime.innerHTML =time.getDay() +"/"+ time.getMonth() + "/"+ time.getFullYear()+ "-" +time.getHours() +":"+ time.getMinutes()
