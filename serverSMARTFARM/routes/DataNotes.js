@@ -31,7 +31,7 @@ app.post('/',function (req, res){
                         //     });
                         datanote.save()
                 }
-        });    
+        });   
                 
   
             //res.send('Data received:\n' + JSON.stringify(req.body));

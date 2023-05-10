@@ -97,15 +97,24 @@
                                                             <div class="d-flex justify-content-between align-items-center mb-3">
                                                                 <h4 class="text-center">Settings</h4>
                                                             </div>
-                                                            <form role="form" id="edit-form" method="POST" action="/DataUsers/update">
+                                                            <form role="form" id="edit-form" method="POST" action="/DataServers">
                                                                 <div class="row mt-3" id="formsetting">
+                                                                    <div class="col-md-12">
+                                                                        <label class="labels">Username</label>
+                                                                        <input type="text" class="form-control" value=""  id="username"  readonly name="username">
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <label class="labels">Key</label>
+                                                                        <input type="text" class="form-control" value=""  id="key" readonly name="key">
+                                                                    </div>
                                                                     <div class="col-md-12">
                                                                         <label class="labels">Main API Adafriut</label>
                                                                         <input type="text" class="form-control" value=""  id="mainapi" name="mainapi">
                                                                     </div>
                                                                     
+                                                                    
                                                                 </div>
-                                                                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" onclick=save()>Save Profile</button></div>
+                                                                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" onclick=save()>Save Setting</button></div>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -147,7 +156,8 @@
                 var listserver =await text.json()
                 var server = listserver[0]
                 document.getElementById("mainapi").value = server.Address
-
+                document.getElementById("username").value = server.ID
+                document.getElementById("key").value=server.Key
                 listAPI = server.ListAPI
                 lenglist = listAPI.length
                 for(i=0;i<lenglist;i++){
@@ -163,7 +173,7 @@
                     input.type="text"
                     input.className="form-control"
                     input.value=listAPI[i].LinkAPI
-
+                    input.name = "api"+i.toString()
                     div1.appendChild(label)
                     div1.appendChild(input)
                     formSet.appendChild(div1)
