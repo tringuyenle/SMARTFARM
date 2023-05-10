@@ -44,152 +44,160 @@
 
     <!-- Modal for light-->
     <div class="modal fade" id="setlight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Hẹn giờ bật đèn</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="startday">Ngày bắt đầu:</label>
-                            <input type="datetime-local" id="startday" name="startday">
-                        </div>
-                        <div class="form-group">
-                            <label for="endday">Thời lượng:</label>
-                            <div id="endday" style="padding-left: 2rem;">
-                                <input type="radio" name="end" id="none">
-                                <label for="none" style="font-weight: lighter;"></label>Không xác định thời lượng<br>
-                                <input type="radio" name="end" id="datetime">
-                                <label for="datetime" style="font-weight: lighter;">Tới <input type="datetime-local" id="end" name="endday"></label><br>
-                                <input type="radio" name="end" id="minute">
-                                <label for="minute" style="font-weight: lighter;">Tính bằng phút <input type="number" id="end" name="endday" min="1" max="60"></label><br>
+        <form method="POST" action="/DataSchedules/Light">
+            <div class="modal-dialog modal-sm" role="document">
+                
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Hẹn giờ bật đèn</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                            <div class="form-group">
+                                <label for="startday">Ngày bắt đầu:</label>
+                                <input type="datetime-local" id="startday" name="startday">
                             </div>
-                        </div>
-                    </form> 
+                            <div class="form-group" >
+                                <label for="endday">Thời lượng:</label>
+                                <div id="endday" style="padding-left: 2rem;">
+                                    <input type="radio" name="setendday" id="none" value="none">
+                                    <label for="none" style="font-weight: lighter;"></label>Không xác định thời lượng<br>
+                                    <input type="radio" name="setendday" id="datetime" value="datetime">
+                                    <label for="datetime" style="font-weight: lighter;">Tới <input type="datetime-local" id="endday" name="endday"></label><br>
+                                    <input type="radio" name="setendday" id="minute" value="minute">
+                                    <label for="minute" style="font-weight: lighter;">Tính bằng phút <input type="number" id="end" name="minute" min="1" max="60"></label><br>
+                                </div>
+                            </div>
+                            
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        <button type="submit"  class="btn btn-primary" >Lưu</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary">Lưu</button>
-                </div>
+                <!-- /.modal-content -->
+            
             </div>
-            <!-- /.modal-content -->
-        </div>
+        </form> 
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
 
     <!-- Modal for pump-->
     <div class="modal fade" id="setpump" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Hẹn giờ bật máy bơm</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="startday">Ngày bắt đầu:</label>
-                            <input type="datetime-local" id="startday" name="startday">
-                        </div>
-                        <div class="form-group">
-                            <label for="endday">Thời lượng:</label>
-                            <div id="endday" style="padding-left: 2rem;">
-                                <input type="radio" name="end" id="none">
-                                <label for="none" style="font-weight: lighter;"></label>Không xác định thời lượng<br>
-                                <input type="radio" name="end" id="datetime">
-                                <label for="datetime" style="font-weight: lighter;">Tới <input type="datetime-local" id="end" name="endday"></label><br>
-                                <input type="radio" name="end" id="minute">
-                                <label for="minute" style="font-weight: lighter;">Tính bằng phút <input type="number" id="end" name="endday" min="1" max="60"></label><br>
+        <form method="POST" action="/DataSchedules/maybom">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Hẹn giờ bật máy bơm</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                            <div class="form-group">
+                                <label for="startday">Ngày bắt đầu:</label>
+                                <input type="datetime-local" id="startday" name="startday">
                             </div>
-                        </div>
-                    </form> 
+                            <div class="form-group">
+                                <label for="endday">Thời lượng:</label>
+                                <div id="endday" style="padding-left: 2rem;">
+                                    <input type="radio" name="setendday" id="none" value="none">
+                                    <label for="none" style="font-weight: lighter;"></label>Không xác định thời lượng<br>
+                                    <input type="radio" name="setendday" id="datetime" value="datetime">
+                                    <label for="datetime" style="font-weight: lighter;">Tới <input type="datetime-local" id="endday" name="endday"></label><br>
+                                    <input type="radio" name="setendday" id="minute" value="minute">
+                                    <label for="minute" style="font-weight: lighter;">Tính bằng phút <input type="number" id="end" name="minute" min="1" max="60"></label><br>
+                                </div>
+                            </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary">Lưu</button>
-                </div>
+                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-content -->
-        </div>
+        </form>
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
 
     <!-- Modal for pump-->
     <div class="modal fade" id="setlight_pump" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Hẹn giờ bật điều hòa</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="startday">Ngày bắt đầu:</label>
-                            <input type="datetime-local" id="startday" name="startday">
-                        </div>
-                        <div class="form-group">
-                            <label for="endday">Thời lượng:</label>
-                            <div id="endday" style="padding-left: 2rem;">
-                                <input type="radio" name="end" id="none">
-                                <label for="none" style="font-weight: lighter;"></label>Không xác định thời lượng<br>
-                                <input type="radio" name="end" id="datetime">
-                                <label for="datetime" style="font-weight: lighter;">Tới <input type="datetime-local" id="end" name="endday"></label><br>
-                                <input type="radio" name="end" id="minute">
-                                <label for="minute" style="font-weight: lighter;">Tính bằng phút <input type="number" id="end" name="endday" min="1" max="60"></label><br>
+        <form method="POST" action="/DataSchedules/dieuhoa">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Hẹn giờ bật điều hòa</h4>
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label for="startday">Ngày bắt đầu:</label>
+                                <input type="datetime-local" id="startday" name="startday">
                             </div>
-                        </div>
-                    </form> 
+                            <div class="form-group">
+                                <label for="endday">Thời lượng:</label>
+                                <div id="endday" style="padding-left: 2rem;">
+                                    <input type="radio" name="setendday" id="none" value="none">
+                                    <label for="none" style="font-weight: lighter;"></label>Không xác định thời lượng<br>
+                                    <input type="radio" name="setendday" id="datetime" value="datetime">
+                                    <label for="datetime" style="font-weight: lighter;">Tới <input type="datetime-local" id="endday" name="endday"></label><br>
+                                    <input type="radio" name="setendday" id="minute" value="minute">
+                                    <label for="minute" style="font-weight: lighter;">Tính bằng phút <input type="number" id="end" name="minute" min="1" max="60"></label><br>
+                                </div>
+                            </div>
+                        </form> 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary">Lưu</button>
-                </div>
+                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-content -->
-        </div>
+        </form>
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
 
     <!-- Modal for fan-->
     <div class="modal fade" id="setfan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Hẹn giờ bật quạt</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="startday">Ngày bắt đầu:</label>
-                            <input type="datetime-local" id="startday" name="startday">
-                        </div>
-                        <div class="form-group">
-                            <label for="endday">Thời lượng:</label>
-                            <div id="endday" style="padding-left: 2rem;">
-                                <input type="radio" name="end" id="none">
-                                <label for="none" style="font-weight: lighter;"></label>Không xác định thời lượng<br>
-                                <input type="radio" name="end" id="datetime">
-                                <label for="datetime" style="font-weight: lighter;">Tới <input type="datetime-local" id="end" name="endday"></label><br>
-                                <input type="radio" name="end" id="minute">
-                                <label for="minute" style="font-weight: lighter;">Tính bằng phút <input type="number" id="end" name="endday" min="1" max="60"></label><br>
+        <form method="POST" action="/DataSchedules/quat">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Hẹn giờ bật quạt</h4>
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label for="startday">Ngày bắt đầu:</label>
+                                <input type="datetime-local" id="startday" name="startday">
                             </div>
-                        </div>
-                    </form> 
+                            <div class="form-group">
+                                <label for="endday">Thời lượng:</label>
+                                <div id="endday" style="padding-left: 2rem;">
+                                    <input type="radio" name="setendday" id="none" value="none">
+                                    <label for="none" style="font-weight: lighter;"></label>Không xác định thời lượng<br>
+                                    <input type="radio" name="setendday" id="datetime" value="datetime">
+                                    <label for="datetime" style="font-weight: lighter;">Tới <input type="datetime-local" id="endday" name="endday"></label><br>
+                                    <input type="radio" name="setendday" id="minute" value="minute">
+                                    <label for="minute" style="font-weight: lighter;">Tính bằng phút <input type="number" id="end" name="minute" min="1" max="60"></label><br>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary">Lưu</button>
-                </div>
+                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-content -->
-        </div>
+        </form>
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->

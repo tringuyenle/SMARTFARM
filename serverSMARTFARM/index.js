@@ -10,6 +10,7 @@ const DataTemperutareRoute = require("./routes/DataTemperatures")
 const DataHumidityRoute = require("./routes/DataHumiditys")
 const DataNote = require("./routes/DataNotes")
 const DataUser = require("./routes/DataUsers")
+const DataSchedule = require("./routes/DataSchedules")
 // const DataNote = require("./model/DataNote")
 const path=require('path')
 const publicpath=path.join(__dirname,'../')
@@ -26,6 +27,7 @@ app.use('/DataHumiditys',DataHumidityRoute)
 app.use('/DataSoilmoistures',DataSoilmoisturetRoute)
 app.use('/post-note',DataNote)
 app.use('/DataUsers', DataUser)
+app.use('/DataSchedules', DataSchedule)
 // app.use(bodyparser.urlencoded({ extended: false }));
 // app.post('/post-note',function (req, res){
 //         dbConn.then(function(db) {
