@@ -70,7 +70,7 @@ async function button(feed, status) {
   fetch(address + feed + "/data", {
   method: 'POST',
   headers: {
-      'X-AIO-Key': "aio_Xgvs307a1vUaGdSPGz5aYBHYJhXP",
+      'X-AIO-Key': server[0].Key,
       'Content-Type': 'application/json'
   },
   body: JSON.stringify({value: status,})
@@ -78,7 +78,9 @@ async function button(feed, status) {
   .then(response => console.log(response.status))
   .catch(error => console.error(error));
 }
-
+let checkden = false
+let checkquat = false
+let checkbom = false
 async function autocheck(){
   text1 = await fetch("http://localhost:3000/DataServers")
   let server = await text1.json()
@@ -93,7 +95,7 @@ async function autocheck(){
   let quat1 = server[0].ListAPI[7].LinkAPI
   let quat2 = server[0].ListAPI[8].LinkAPI
   let quat3 = server[0].ListAPI[9].LinkAPI
-  
+
   text = await fetch("http://localhost:3000/DataSchedules")
   schedule = await text.json()
   for(i=0;i<schedule.length;i++){
@@ -122,7 +124,11 @@ async function autocheck(){
         endday.setMinutes(endday.getMinutes()+schedule[i].Minute )
       }
       if (nowday == startdayday && nowyear==startdayyear && nowmon == startdaymon && nowhours ==startdayhours && nowminute==startdayminute){
-        button(bongden, true)
+        if(checkden == false){
+          button(bongden, true)
+          checkden = true
+        }
+        
       }
       if(endday!=""){
         enddayday = endday.getDate()
@@ -131,7 +137,10 @@ async function autocheck(){
         enddayhours = endday.getHours()+1
         enddayminute = endday.getMinutes()+1
         if (nowday == enddayday && nowyear==enddayyear && nowmon == enddaymon && nowhours ==enddayhours && nowminute==enddayminute){
-          button(bongden, false)
+          if(checkden==true){
+            button(bongden, false)
+            checkden=false
+          }
         }
       }
       
@@ -150,7 +159,10 @@ async function autocheck(){
         endday.setMinutes(endday.getMinutes()+schedule[i].Minute )
       }
       if (nowday == startdayday && nowyear==startdayyear && nowmon == startdaymon && nowhours ==startdayhours && nowminute==startdayminute){
-        button(maybom, true)
+        if(checkbom==false){
+          button(maybom, true)
+          checkbom=true
+        }
       }
       if(endday!=""){
         enddayday = endday.getDate()
@@ -159,7 +171,10 @@ async function autocheck(){
         enddayhours = endday.getHours()+1
         enddayminute = endday.getMinutes()+1
         if (nowday == enddayday && nowyear==enddayyear && nowmon == enddaymon && nowhours ==enddayhours && nowminute==enddayminute){
+          if(checkbom==true){
           button(maybom, false)
+          checkbom=false
+          }
         }
       }
       
@@ -178,8 +193,11 @@ async function autocheck(){
         endday.setMinutes(endday.getMinutes()+schedule[i].Minute )
       }
       if (nowday == startdayday && nowyear==startdayyear && nowmon == startdaymon && nowhours ==startdayhours && nowminute==startdayminute){
-        button(quat2, true)
-        fanspeech(address+ quat2, 2)
+        if(checkquat==false){
+          button(quat2, true)
+          fanspeech(address+ quat2, 2)
+          checkquat=true
+        }
       }
       if(endday!=""){
         enddayday = endday.getDate()
@@ -188,7 +206,10 @@ async function autocheck(){
         enddayhours = endday.getHours()+1
         enddayminute = endday.getMinutes()+1
         if (nowday == enddayday && nowyear==enddayyear && nowmon == enddaymon && nowhours ==enddayhours && nowminute==enddayminute){
-          button(quat2, false)
+          if(checkquat==true){
+            button(quat2, false)
+            checkquat=false
+          }
         }
       }
       
@@ -207,9 +228,13 @@ async function autocheck(){
         endday.setMinutes(endday.getMinutes()+schedule[i].Minute )
       }
       if (nowday == startdayday && nowyear==startdayyear && nowmon == startdaymon && nowhours ==startdayhours && nowminute==startdayminute){
-        button(quat2, true)
-        button(maybom,true)
-        fanspeech(address+ quat2, 2)
+        if(checkbom == false && checkquat==false){
+          button(quat2, true)
+          button(maybom,true)
+          fanspeech(address+ quat2, 2)
+          checkbom=true
+          checkquat=true
+        }
       }
       if(endday!=""){
         enddayday = endday.getDate()
@@ -218,8 +243,12 @@ async function autocheck(){
         enddayhours = endday.getHours()+1
         enddayminute = endday.getMinutes()+1
         if (nowday == enddayday && nowyear==enddayyear && nowmon == enddaymon && nowhours ==enddayhours && nowminute==enddayminute){
+          if(checkbom==true && checkquat==true){
           button(quat2, false)
           button(maybom,false)
+          checkbom=false
+          checkquat=false
+          }
         }
       }
       
