@@ -5,7 +5,7 @@ from Adafruit_IO import MQTTClient
 
 AIO_FEED_ID = "anh-sang"
 AIO_USERNAME = "tringuyennek"
-AIO_KEY = "aio_kgAc827hGozCVrxabIaQOAdG5Rcs"
+AIO_KEY = "aio_kMaj50A7fqDtQg4pi625TUTvld48"
 
 def connected(client):
     print("Ket noi thanh cong ...")
@@ -31,9 +31,9 @@ client.loop_background()
 
 while True:
     anhsang = random.randint(0, 100)
-    nhietdo = random.randint(0, 50)
-    dakk = random.randint(30, 70)
-    dad = random.randint(20, 80)
+    nhietdo = random.randint(10, 50)
+    dakk = random.randint(10, 50)
+    dad = random.randint(10, 50)
     print("Cap nhat anh sang:", anhsang)
     client.publish("anh-sang", anhsang)
     print("Cap nhat nhiet do:", nhietdo)

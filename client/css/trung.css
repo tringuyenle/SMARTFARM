@@ -1,0 +1,59 @@
+#pop-up-panel {
+position:fixed;
+top:20%;
+left:35%;
+height:40%;
+z-index:999;
+border:2px solid grey;
+padding: 0 2em;
+
+display:flex;
+justify-content: space-evenly;
+flex-direction: column;
+visibility: hidden;
+
+font-weight:600;
+}
+#pop-up-panel input {
+width:4em;
+}
+#pop-up-panel > h3,h4,h5,h6 {
+text-align:center;
+margin:0;
+padding:0;
+font-weight:700;
+}
+.inp-ctn {
+display: flex;
+justify-content: center;
+}
+.inp-ctn * {
+margin: 0 0.5em;
+}
+#btn-ctn {
+display: flex;
+justify-content: center;
+}
+#btn-ctn > button {
+margin: 0 0.5em;
+}
+#fanspeech {
+    margin-left:3px;
+}
+#note-warning {
+   position:fixed;
+top:2%;
+left:40%;
+width:20%;
+z-index:9999;
+background-color: indianred; 
+
+display: flex;
+flex-direction: column;
+justify-content: center;
+padding: 2em;
+color: white;
+}
+#note-warning > div {
+margin: 0.5em;
+}

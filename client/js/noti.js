@@ -188,18 +188,55 @@ function generateMessagesFromObject(objectData, objectString) {
     return objectData[propID] +"__"+ mainMsg +"__"+ beautifyStringDate ( objectData[propEndTime] )
 }
 
-var repeatTask = window.setInterval(checkParamaterAndSendNoti,2000);//2 giay cap nhat thong bao 1 lan
+//Note code
+async function getNoteDataAndCheck() {
+    // let resJSON = await getObjectDataFromServer('post-note');
+        let resJSON = {
+    Title: "dýdiaudiosaudosausdjasopda",
+    Summary: "đádasiiópioadiaopide7iqryỉuyw823457",
+    Content: "kdioafasdf9090er49orgsertgio590",
+    Time: "3910-232139-9-"
+};
+
+    if(!resJSON || !resJSON.Time || !resJSON.Time.length) {
+        return;
+    }
+
+    let noteNoti = document.createElement('div');
+    noteNoti.setAttribute("id", "note-warning");
+    noteNoti.innerHTML += '<div><h4 style="text-align:center;">Ghi Chú Đến Hạn</h4></div>'
+
+    noteNoti.innerHTML +=  `<div><h5 style="text-align:center;">${resJSON.Title}</h5></div>`;
+
+     noteNoti.innerHTML +=  `<div><h5 style="text-align:center;">${resJSON.Time}</h5></div>`;
+
+    document.getElementsByTagName("body")[0].appendChild(noteNoti);
+
+    setTimeout(() => { 
+        let body = document.getElementsByTagName("body")[0];
+
+        while(body.lastElementChild.getAttribute('id') === "note-warning") {
+            body.removeChild(body.lastElementChild);
+        }
+    }, 2000)
+}
+
+getNoteDataAndCheck();
+//Note code
+
+// Driver code
+var repeatTask1 = window.setInterval(checkParamaterAndSendNoti,2000);//2 giay cap nhat thong bao 1 lan
 var intervalSet = true;
 var togWarnBut = document.getElementById('toggle-warn');
 
 togWarnBut.addEventListener('click', () => {
     if(!window.intervalSet) {
-        window.repeatTask = window.setInterval(checkParamaterAndSendNoti,2000);//2 giay cap nhat thong bao 1 lan
+        window.repeatTask1 = window.setInterval(checkParamaterAndSendNoti,2000);//2 giay cap nhat thong bao 1 lan
         window.intervalSet = true;
         togWarnBut.innerText = 'Tắt Thông Báo';
     }
     else {
-        window.clearInterval(window.repeatTask);
+        window.clearInterval(window.repeatTask1);
         window.intervalSet = false;
         togWarnBut.innerText = 'Bật Thông Báo';
     }

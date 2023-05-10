@@ -32,13 +32,6 @@
 
         <!--fixing underway CSS here-->
         <link href="../css/toggle_switcher.css" rel="stylesheet"> 
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
     </head>
     <body>
 
@@ -347,11 +340,11 @@
                                 <a href="#">
                                     <div class="panel-footer">
                                         <label class="switch switchelement">
-                                        <input type="checkbox">
+                                        <input type="checkbox" onclick="button('may-bom', checked); button('quat2', checked)">
                                         <span class="slider round"></span>
                                         </label>
 
-                                        <button data-toggle="modal" data-target="#setlight_pump" style="border: 0; background-color:rgb(245 245 245);"><span class="pull-right" id="control-light">Chế độ thủ công</span></button>
+                                        <button class="pull-right" id="control-pump-fan" data-toggle="modal" data-target="#setlight_pump" style="border: 0; background-color:rgb(245 245 245);">Chế độ thủ công</button>
 
                                         <!-- <div class="clearfix"></div> -->
                                     </div>
@@ -371,7 +364,7 @@
                                         </div>
                                         <div class="col-xs-9 text-right">
                                             <div class="huge"><span id="nhiet-do"></span>°C</div>
-                                            <span>Nhiệt độ</span>
+                                            <span>Nhiệt độ<div style="height:8px;"></div></span>
                                         </div>
                                     </div>
                                 </div>
@@ -385,7 +378,7 @@
                                             <button type="button" class="btn btn-default btn-circle" id="fanspeech" onclick="fancontrol()">3</button>
                                         </div>
                                         
-                                        <button data-toggle="modal" data-target="#setfan" style="border: 0; background-color:rgb(245 245 245);"><span class="pull-right" id="control-light">Chế độ thủ công</span></button>
+                                        <button data-toggle="modal" data-target="#setfan" style="border: 0; background-color:rgb(245 245 245);"><span class="pull-right" id="control-fan">Chế độ thủ công</span></button>
                                         <!-- <div class="clearfix"></div> -->
                                     </div>
                                 </a>
