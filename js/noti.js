@@ -1,4 +1,4 @@
-const TEMPERATURE_THRESHOLD = [15,35],
+var TEMPERATURE_THRESHOLD = [15,35],
     SOIL_MOIST_THRESHOLD = [10,50],
     HUMIDITY_THRESHOLD = [10,50];
     LIGHT_THRESHOLD = [10,70];
@@ -7,6 +7,60 @@ var temperature,
     soilMoisture,
     humidity,
     light;
+
+var popuppanel = document.getElementById('pop-up-panel');
+
+function togglePopUpPanel() {
+    if(popuppanel.style.visibility === 'hidden') {
+        displayCurrentThreshold();
+        popuppanel.style.visibility = 'visible';
+    }
+    else { popuppanel.style.visibility = 'hidden'; }
+}
+function displayCurrentThreshold() {
+    let arrFil = [...document.getElementsByClassName('fil')];
+
+    arrFil[0].value = TEMPERATURE_THRESHOLD[0]; arrFil[1].value = TEMPERATURE_THRESHOLD[1];
+    arrFil[2].value = LIGHT_THRESHOLD[0]; arrFil[3].value = LIGHT_THRESHOLD[1];
+    arrFil[4].value = HUMIDITY_THRESHOLD[0]; arrFil[5].value = SOIL_MOIST_THRESHOLD[1];
+    arrFil[6].value = SOIL_MOIST_THRESHOLD[0]; arrFil[7].value = SOIL_MOIST_THRESHOLD[1];
+}
+function updateThreshold() {
+    let arrFil = [...document.getElementsByClassName('fil')];
+
+    let allFilValueOK = true;
+
+    arrFil.forEach(ele => {
+        if(!ele || !ele.value || !ele.value.length
+            || ele.value.length > 3 || parseInt(ele) <= 0 || parseInt(ele) > 150) {
+            allFilValueOK = false;
+        }
+    });
+
+    if(!allFilValueOK) {
+        triggerMsg('Hãy Đảm Bảo Nhập Giá Trị Hợp Lệ!','red');
+        return;
+    }
+
+    TEMPERATURE_THRESHOLD[0] = arrFil[0].value; TEMPERATURE_THRESHOLD[1] = arrFil[1].value;
+    LIGHT_THRESHOLD[0] = arrFil[2].value; LIGHT_THRESHOLD[1] = arrFil[3].value;
+    HUMIDITY_THRESHOLD[0] = arrFil[4].value; SOIL_MOIST_THRESHOLD[1] = arrFil[5].value;
+    SOIL_MOIST_THRESHOLD[0] = arrFil[6].value; SOIL_MOIST_THRESHOLD[1] = arrFil[7].value;
+
+    triggerMsg('Ghi Thành Công! Bạn Có Thể Đóng Của Sổ Này!','green');
+}
+function triggerMsg(msg, color) {
+    let commandresult = document.getElementById('command-result');
+    commandresult.style.color = color;
+    commandresult.innerText = msg;
+
+    setTimeout(() => { document.getElementById('command-result').innerText = ''; },2000);
+}
+
+function beautifyStringDate(uglyDate) {
+    let arr = uglyDate.slice(0,uglyDate.length-4).split('T');
+    return arr[1] + " " + arr[0];
+}
 
 function sendNotificationToScreen(mainMsg){
     if(!mainMsg || !mainMsg.length) {
@@ -39,7 +93,7 @@ function sendNotificationToScreen(mainMsg){
     chill_List = list_Warn.children
     lenChillList = chill_List.length
 
-    while(list_Warn.childElementCount > 4) {
+    if(list_Warn.childElementCount > 4) {
         list_Warn.removeChild(list_Warn.lastElementChild); // clear list
     }
 
@@ -131,7 +185,7 @@ function generateMessagesFromObject(objectData, objectString) {
     // let propStatus = "Status";
     let propEndTime = "End_time";
 
-    return objectData[propID] +"__"+ mainMsg +"__"+ objectData[propEndTime]
+    return objectData[propID] +"__"+ mainMsg +"__"+ beautifyStringDate ( objectData[propEndTime] )
 }
 
 var repeatTask = window.setInterval(checkParamaterAndSendNoti,2000);//2 giay cap nhat thong bao 1 lan
