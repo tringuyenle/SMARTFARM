@@ -28,8 +28,13 @@ app.post('/Light',function (req, res){
                 Minute: req.body.setendday === "minute" ? req.body.minute : null, // assign minute if selected, null otherwise
                 EndDay: req.body.setendday === "datetime" ? req.body.endday : null
             })
-            dataschedule.save()
-            res.redirect('../../pages/index.html');
+            if(dataschedule.StartDay){
+                if(!(dataschedule.None == false && dataschedule.Minute == null && dataschedule.EndDay == null)){
+                    dataschedule.save()
+                    res.redirect('../../pages/index.html');
+                }
+            }
+            
                 
         });    
                 
@@ -46,8 +51,12 @@ app.post('/maybom',function (req, res){
             Minute: req.body.setendday === "minute" ? req.body.minute : null, // assign minute if selected, null otherwise
             EndDay: req.body.setendday === "datetime" ? req.body.endday : null
         })
-        dataschedule.save()
-        res.redirect('../../pages/index.html');
+        if(dataschedule.StartDay){
+            if(!(dataschedule.None == false && dataschedule.Minute == null && dataschedule.EndDay == null)){
+                dataschedule.save()
+                res.redirect('../../pages/index.html');
+            }
+        }
             
     });    
             
@@ -64,8 +73,12 @@ app.post('/quat',function (req, res){
             Minute: req.body.setendday === "minute" ? req.body.minute : null, // assign minute if selected, null otherwise
             EndDay: req.body.setendday === "datetime" ? req.body.endday : null
         })
-        dataschedule.save()
-        res.redirect('../../pages/index.html');
+        if(dataschedule.StartDay){
+            if(!(dataschedule.None == false && dataschedule.Minute == null && dataschedule.EndDay == null)){
+                dataschedule.save()
+                res.redirect('../../pages/index.html');
+            }
+        }
             
     });    
             
@@ -82,8 +95,12 @@ app.post('/dieuhoa',function (req, res){
             Minute: req.body.setendday === "minute" ? req.body.minute : null, // assign minute if selected, null otherwise
             EndDay: req.body.setendday === "datetime" ? req.body.endday : null
         })
-        dataschedule.save()
-        res.redirect('../../pages/index.html');
+        if(dataschedule.StartDay){
+            if(!(dataschedule.None == false && dataschedule.Minute == null && dataschedule.EndDay == null)){
+                dataschedule.save()
+                res.redirect('../../pages/index.html');
+            }
+        }
             
     });    
             
