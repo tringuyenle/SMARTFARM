@@ -31,7 +31,7 @@ app.post('/Light',function (req, res){
             if(dataschedule.StartDay){
                 if(!(dataschedule.None == false && dataschedule.Minute == null && dataschedule.EndDay == null)){
                     dataschedule.save()
-                    res.redirect('../../pages/index.html');
+                    res.redirect('../../client/pages/index.html');
                 }
             }
             
@@ -54,7 +54,7 @@ app.post('/maybom',function (req, res){
         if(dataschedule.StartDay){
             if(!(dataschedule.None == false && dataschedule.Minute == null && dataschedule.EndDay == null)){
                 dataschedule.save()
-                res.redirect('../../pages/index.html');
+                res.redirect('../../client/pages/index.html');
             }
         }
             
@@ -76,7 +76,7 @@ app.post('/quat',function (req, res){
         if(dataschedule.StartDay){
             if(!(dataschedule.None == false && dataschedule.Minute == null && dataschedule.EndDay == null)){
                 dataschedule.save()
-                res.redirect('../../pages/index.html');
+                res.redirect('../../client/pages/index.html');
             }
         }
             
@@ -98,7 +98,7 @@ app.post('/dieuhoa',function (req, res){
         if(dataschedule.StartDay){
             if(!(dataschedule.None == false && dataschedule.Minute == null && dataschedule.EndDay == null)){
                 dataschedule.save()
-                res.redirect('../../pages/index.html');
+                res.redirect('../../client/pages/index.html');
             }
         }
             

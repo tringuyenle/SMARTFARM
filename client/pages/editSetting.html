@@ -213,13 +213,20 @@
             
             
             lengthlistapi = person.ListApi.length
+            var formsetting= document.getElementById("formsetting")
+            var label = document.createElement("label")
+            label.innerHTML = "List API"
+
+            div1 = document.createElement("div")
+            div1.className ="col-md-12"
+            div1.appendChild(label)
+            formsetting.appendChild(div1)
             for(i=0;i<lengthlistapi;i++){
                 var formsetting= document.getElementById("formsetting")
                 var divsetting = document.createElement("div")
                 divsetting.className="col-md-12"
 
-                var lable = document.createElement("label")
-                lable.innerHTML = "API"+" "+(i+1).toString()
+
 
                 var input = document.createElement("input")
                 input.type = "text"
@@ -228,7 +235,6 @@
                 input.id ="api" +(i+1).toString()
                 input.value = person.ListApi[i]
 
-                divsetting.appendChild(lable)
                 divsetting.appendChild(input)
                 formsetting.appendChild(divsetting)
              
