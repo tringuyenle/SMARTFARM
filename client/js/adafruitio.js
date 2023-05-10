@@ -126,6 +126,7 @@ async function autocheck(){
       if (nowday == startdayday && nowyear==startdayyear && nowmon == startdaymon && nowhours ==startdayhours && nowminute==startdayminute){
         if(checkden == false){
           button(bongden, true)
+          buttoncheck(address+bongden,"bong-den" )
           checkden = true
         }
         
@@ -139,16 +140,15 @@ async function autocheck(){
         if (nowday == enddayday && nowyear==enddayyear && nowmon == enddaymon && nowhours ==enddayhours && nowminute==enddayminute){
           if(checkden==true){
             button(bongden, false)
+            buttoncheck(address+bongden,"bong-den" )
             checkden=false
           }
         }
       }
       
-      buttoncheck(address+bongden,"bong-den" )
+      
     }
     else if(schedule[i].Type=="Maybom"){
-
-      
       let endday = ""
       if(schedule[i].EndDay != null){
         endday = new Date(schedule[i].EndDay)
@@ -161,6 +161,7 @@ async function autocheck(){
       if (nowday == startdayday && nowyear==startdayyear && nowmon == startdaymon && nowhours ==startdayhours && nowminute==startdayminute){
         if(checkbom==false){
           button(maybom, true)
+          buttoncheck(address+maybom,"may-bom" )
           checkbom=true
         }
       }
@@ -173,12 +174,13 @@ async function autocheck(){
         if (nowday == enddayday && nowyear==enddayyear && nowmon == enddaymon && nowhours ==enddayhours && nowminute==enddayminute){
           if(checkbom==true){
           button(maybom, false)
+          buttoncheck(address+maybom,"may-bom" )
           checkbom=false
           }
         }
       }
       
-      buttoncheck(address+maybom,"may-bom" )
+      
     }
     else if(schedule[i].Type=="Quat"){
 
@@ -196,6 +198,7 @@ async function autocheck(){
         if(checkquat==false){
           button(quat2, true)
           fanspeech(address+ quat2, 2)
+          buttoncheck(address+quat2,"quat" )
           checkquat=true
         }
       }
@@ -209,11 +212,13 @@ async function autocheck(){
           if(checkquat==true){
             button(quat2, false)
             checkquat=false
+            buttoncheck(address+quat2,"quat" )
+
           }
         }
       }
       
-      buttoncheck(address+quat2,"quat" )
+      
     }
     else if(schedule[i].Type=="DieuHoa"){
       
@@ -232,6 +237,8 @@ async function autocheck(){
           button(quat2, true)
           button(maybom,true)
           fanspeech(address+ quat2, 2)
+          buttoncheck(address+quat2,"quat" )
+          buttoncheck(address+maybom,"may-bom" )
           checkbom=true
           checkquat=true
         }
@@ -244,6 +251,8 @@ async function autocheck(){
         enddayminute = endday.getMinutes()+1
         if (nowday == enddayday && nowyear==enddayyear && nowmon == enddaymon && nowhours ==enddayhours && nowminute==enddayminute){
           if(checkbom==true && checkquat==true){
+            buttoncheck(address+quat2,"quat" )
+            buttoncheck(address+maybom,"may-bom" )
           button(quat2, false)
           button(maybom,false)
           checkbom=false
@@ -252,8 +261,7 @@ async function autocheck(){
         }
       }
       
-      buttoncheck(address+quat2,"quat" )
-      buttoncheck(address+maybom,"may-bom" )
+      
     }
   }
 }
