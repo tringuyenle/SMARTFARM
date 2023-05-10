@@ -51,7 +51,7 @@ async function button(feed, status) {
   fetch("https://io.adafruit.com/api/v2/tringuyennek/feeds/" + feed + "/data", {
   method: 'POST',
   headers: {
-      'X-AIO-Key': "aio_kMaj50A7fqDtQg4pi625TUTvld48",
+      'X-AIO-Key': "aio_dlOk274ZEfjB65xlGg88XLPrI9N8",
       'Content-Type': 'application/json'
   },
   body: JSON.stringify({value: status,})

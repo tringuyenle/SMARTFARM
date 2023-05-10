@@ -294,6 +294,39 @@
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-red">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-thermometer fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><span id="nhiet-do"></span>°C</div>
+                                            <span>Nhiệt độ<div style="height:8px;"></div></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#">
+                                    <div class="panel-footer">
+                                        <div style="display: flex; align-items: center;">
+                                            <label class="switch switchelement">
+                                                <input type="checkbox" id="quat" onclick="button('quat' + document.getElementById('fanspeech').innerHTML, checked)">
+                                                <span class="slider round"></span>
+                                            </label>
+                                            <button class="btn btn-default btn-circle switchelement" id="fanspeech" onclick="fancontrol()">3</button>
+                                        </div>
+                                        
+                                        <button data-toggle="modal" data-target="#setfan" style="border: 0; background-color:rgb(245 245 245);"><span class="pull-right" id="control-fan">Chế độ thủ công</span></button>
+                                        <!-- <div class="clearfix"></div> -->
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="displayWarning">
+                                <div >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
                             <div class="panel panel-green">
                                 <div class="panel-heading">
                                     <div class="row">
@@ -346,39 +379,6 @@
 
                                         <button class="pull-right" id="control-pump-fan" data-toggle="modal" data-target="#setlight_pump" style="border: 0; background-color:rgb(245 245 245);">Chế độ thủ công</button>
 
-                                        <!-- <div class="clearfix"></div> -->
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="displayWarning">
-                                <div >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-red">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <i class="fa fa-thermometer fa-5x"></i>
-                                        </div>
-                                        <div class="col-xs-9 text-right">
-                                            <div class="huge"><span id="nhiet-do"></span>°C</div>
-                                            <span>Nhiệt độ<div style="height:8px;"></div></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <div style="display: flex; align-items: center;">
-                                            <label class="switch switchelement">
-                                                <input type="checkbox">
-                                                <span class="slider round"></span>
-                                            </label>
-                                            <button type="button" class="btn btn-default btn-circle switchelement" id="fanspeech" onclick="fancontrol()">3</button>
-                                        </div>
-                                        
-                                        <button data-toggle="modal" data-target="#setfan" style="border: 0; background-color:rgb(245 245 245);"><span class="pull-right" id="control-fan">Chế độ thủ công</span></button>
                                         <!-- <div class="clearfix"></div> -->
                                     </div>
                                 </a>
