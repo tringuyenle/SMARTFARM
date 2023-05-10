@@ -1,14 +1,14 @@
 minLight = 10
-maxLight = 70
+maxLight = 100
 
 minHum = 10
 maxHum = 50
 
 minTem = 15
-maxTem = 35
+maxTem = 40
 
 minSoi = 10
-maxSoi = 50
+maxSoi = 100
 
 function addchill(list_Warn, thoigian, minOrmax, type){
     var name = type + " " + minOrmax
@@ -24,8 +24,34 @@ function addchill(list_Warn, thoigian, minOrmax, type){
     var span = document.createElement("span")
     span.className = "pull-right text-muted small"
 
+    const timeInMs = new Date(thoigian).getTime();
 
-    span.innerHTML = "vai phut truoc"
+// Get the current time in milliseconds
+    const nowInMs = new Date().getTime();
+
+    // Calculate the difference in milliseconds
+    const diffInMs = nowInMs - timeInMs;
+
+    // Convert milliseconds to days, hours, and minutes
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+    const diffInHours = Math.floor((diffInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const diffInMinutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    timewarn =""
+    if(diffInDays>0){
+        timewarn+=diffInDays.toString()+" "+ "ngày "+diffInHours.toString()+" giờ " +  diffInMinutes.toString() + " phút trước"
+        
+    }
+    else if(diffInHours>0){
+        timewarn+=diffInHours.toString()+" giờ " +  diffInMinutes.toString() + " phút trước"
+    }
+    else{
+        timewarn+=diffInMinutes.toString()+" phút trước"
+    }
+
+        
+
+    span.innerHTML = timewarn
 
     a.appendChild(i)
     a.appendChild(spanTB)
@@ -63,30 +89,35 @@ async function displayWarn(){
     var lengthlistTemperature = listTemperature.length
 
     listWarn = document.getElementById("list_Warn")
-    if(listLight[lengthListLight-1].Value < minLight){
-        addchill(listWarn, "", "duoi nguong", "Anh sang")
+    lengthchill = list_Warn.childElementCount
+    for(i=0;i<lengthchill;i++){
+        listWarn.removeChild(listWarn.lastChild)
     }
-    if(listLight[lengthListLight-1].Value > maxLight){
-        addchill(listWarn, "", "vuot nguong", "Anh sang")
+    if(listLight[lengthListLight-1].Value <= minLight){
+        addchill(listWarn, listLight[lengthListLight-1].End_time, "dưới ngưỡng", "Ánh sáng")
     }
-    if(listHumidity[lengthlistHumidity-1].Value < minHum){
-        addchill(listWarn, "", "duoi nguong", "Do am khong khi")
+    if(listLight[lengthListLight-1].Value >= maxLight){
+        addchill(listWarn, listLight[lengthListLight-1].End_time, "vượt ngưỡng", "Ánh sáng")
     }
-    if(listHumidity[lengthlistHumidity-1].Value > maxHum){
-        addchill(listWarn, "", "vuot nguong", "Do am khong khi")
+    if(listHumidity[lengthlistHumidity-1].Value <= minHum){
+        addchill(listWarn, listHumidity[lengthlistHumidity-1].End_time, "dưới ngưỡng", "Độ ẩm không khí")
     }
-    if(listSoilmoisture[lengthlistSoilmoisture-1].Value < minSoi){
-        addchill(listWarn, "", "duoi nguong", "Do am dat")
+    if(listHumidity[lengthlistHumidity-1].Value >= maxHum){
+        addchill(listWarn, listHumidity[lengthlistHumidity-1].End_time, "vượt ngưỡng", "Độ ẩm không khí")
     }
-    if(listSoilmoisture[lengthlistSoilmoisture-1].Value > maxSoi){
-        addchill(listWarn, "", "vuot nguong", "Do am dat")
+    if(listSoilmoisture[lengthlistSoilmoisture-1].Value <= minSoi){
+        addchill(listWarn, listSoilmoisture[lengthlistSoilmoisture-1].End_time, "vượt ngưỡng", "Độ ẩm đất")
     }
-    if(listTemperature[lengthlistTemperature-1].Value < minTem){
-        addchill(listWarn, "", "duoi nguong", "Nhiet do")
+    if(listSoilmoisture[lengthlistSoilmoisture-1].Value >= maxSoi){
+        addchill(listWarn, listSoilmoisture[lengthlistSoilmoisture-1].End_time, "vượt ngưỡng", "Độ ẩm đất")
     }
-    if(listTemperature[lengthlistTemperature-1].Value > maxTem){
-        addchill(listWarn, "", "vuot nguong", "Nhiet do")
+    if(listTemperature[lengthlistTemperature-1].Value <= minTem){
+        addchill(listWarn,listTemperature[lengthlistTemperature-1].End_time, "dưới ngưỡng", "Nhiệt độ")
     }
+    if(listTemperature[lengthlistTemperature-1].Value >= maxTem){
+        addchill(listWarn, listTemperature[lengthlistTemperature-1].End_time, "vượt ngưỡng", "Nhiệt độ")
+    }
+
 
 }
 //setInterval(function () {displayWarn()}, 1000);

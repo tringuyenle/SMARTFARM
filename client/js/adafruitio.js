@@ -13,6 +13,9 @@ async function buttoncheck(url, idspan) {
     document.getElementById(idspan).checked = true;
     if (idspan == 'auto') hidebtn(true);
   }
+  else {
+    document.getElementById(idspan).checked = false;
+  }
 }
 
 async function fanspeech(url, speech) {
@@ -24,34 +27,50 @@ async function fanspeech(url, speech) {
 }
 
 async function updateData(url) {
-  fetch_api(url + "/anh-sang", "anh-sang");
-  fetch_api(url + "/nhiet-do", "nhiet-do");
-  fetch_api(url + "/do-am-khong-khi", "do-am-khong-khi");
-  fetch_api(url + "/do-am-dat", "do-am-dat");
-  buttoncheck(url + "/b-ng-den", "bong-den");
-  buttoncheck(url + "/may-bom", "may-bom");
-  buttoncheck(url + "/tinh-trang", "auto");
-  buttoncheck(url + "/quat1", "quat");
-  buttoncheck(url + "/quat2", "quat");
-  buttoncheck(url + "/quat3", "quat");
-  fanspeech(url + "/quat1", 1)
-  fanspeech(url + "/quat2", 2)
-  fanspeech(url + "/quat3", 3)
+  text = await fetch("http://localhost:3000/DataServers")
+  server = await text.json()
+
+  anhsang = server[0].ListAPI[1].LinkAPI
+  nhietdo = server[0].ListAPI[2].LinkAPI
+  doamkk = server[0].ListAPI[3].LinkAPI
+  doamdat = server[0].ListAPI[4].LinkAPI
+  bongden = server[0].ListAPI[5].LinkAPI
+  maybom = server[0].ListAPI[0].LinkAPI
+  tinhtrang = server[0].ListAPI[6].LinkAPI
+  quat1 = server[0].ListAPI[7].LinkAPI
+  quat2 = server[0].ListAPI[8].LinkAPI
+  quat3 = server[0].ListAPI[9].LinkAPI
+  fetch_api(url + "/" + anhsang, "anh-sang");
+  fetch_api(url + "/" +nhietdo, "nhiet-do");
+  fetch_api(url + "/" +doamkk, "do-am-khong-khi");
+  fetch_api(url + "/" +doamdat, "do-am-dat");
+  buttoncheck(url + "/"+bongden, "bong-den");
+  buttoncheck(url + "/"+maybom, "may-bom");
+  buttoncheck(url + "/" + tinhtrang, "auto");
+  buttoncheck(url + "/" +quat1, "quat");
+  buttoncheck(url + "/" +quat2, "quat");
+  buttoncheck(url + "/" + quat3, "quat");
+  fanspeech(url + "/"+quat1, 1)
+  fanspeech(url + "/" + quat2, 2)
+  fanspeech(url + "/" +quat3, 3)
   setInterval(function () 
-  {fetch_api(url + "/anh-sang", "anh-sang"); 
-  fetch_api(url + "/nhiet-do", "nhiet-do"); 
-  fetch_api(url + "/do-am-khong-khi", "do-am-khong-khi"); 
-  fetch_api(url + "/do-am-dat", "do-am-dat");}, 1000);
+  {fetch_api(url + "/" + anhsang, "anh-sang"); 
+  fetch_api(url + "/" + nhietdo, "nhiet-do"); 
+  fetch_api(url + "/" + doamkk, "do-am-khong-khi"); 
+  fetch_api(url + "/" + doamdat, "do-am-dat");}, 1000);
 }
 
 async function button(feed, status) {
+  text1 = await fetch("http://localhost:3000/DataServers")
+  let server = await text1.json()
+  let address = server[0].Address
   if (status) status = 1
   else status = 0;
 
-  fetch("https://io.adafruit.com/api/v2/tringuyennek/feeds/" + feed + "/data", {
+  fetch(address + feed + "/data", {
   method: 'POST',
   headers: {
-      'X-AIO-Key': "aio_vDOg33Soh9BqYyqHCm96HbtwdCwi",
+      'X-AIO-Key': "aio_Xgvs307a1vUaGdSPGz5aYBHYJhXP",
       'Content-Type': 'application/json'
   },
   body: JSON.stringify({value: status,})
@@ -59,3 +78,155 @@ async function button(feed, status) {
   .then(response => console.log(response.status))
   .catch(error => console.error(error));
 }
+
+async function autocheck(){
+  text1 = await fetch("http://localhost:3000/DataServers")
+  let server = await text1.json()
+  let address = server[0].Address
+  let anhsang = server[0].ListAPI[1].LinkAPI
+  let nhietdo = server[0].ListAPI[2].LinkAPI
+  let doamkk = server[0].ListAPI[3].LinkAPI
+  let doamdat = server[0].ListAPI[4].LinkAPI
+  let bongden = server[0].ListAPI[5].LinkAPI
+  let maybom = server[0].ListAPI[0].LinkAPI
+  let tinhtrang = server[0].ListAPI[6].LinkAPI
+  let quat1 = server[0].ListAPI[7].LinkAPI
+  let quat2 = server[0].ListAPI[8].LinkAPI
+  let quat3 = server[0].ListAPI[9].LinkAPI
+  
+  text = await fetch("http://localhost:3000/DataSchedules")
+  schedule = await text.json()
+  for(i=0;i<schedule.length;i++){
+    let now = new Date()
+      nowday = now.getDate()
+      nowyear = now.getFullYear()
+      nowmon = now.getMonth()+1
+      nowhours = now.getHours()+1
+      nowminute = now.getMinutes()+1
+      let startday = new Date(schedule[i].StartDay)
+      startdayday = startday.getDate()
+      startdayyear = startday.getFullYear()
+      startdaymon = startday.getMonth()+1
+      startdayhours = startday.getHours()+1
+      startdayminute = startday.getMinutes()+1
+    if(schedule[i].Type=="Den"){
+
+      
+      let endday = ""
+      if(schedule[i].EndDay != null){
+        endday = new Date(schedule[i].EndDay)
+      }
+
+      if(schedule[i].Minute != null){
+        endday = new Date(schedule[i].StartDay)
+        endday.setMinutes(endday.getMinutes()+schedule[i].Minute )
+      }
+      if (nowday == startdayday && nowyear==startdayyear && nowmon == startdaymon && nowhours ==startdayhours && nowminute==startdayminute){
+        button(bongden, true)
+      }
+      if(endday!=""){
+        enddayday = endday.getDate()
+        enddayyear = endday.getFullYear()
+        enddaymon = endday.getMonth()+1
+        enddayhours = endday.getHours()+1
+        enddayminute = endday.getMinutes()+1
+        if (nowday == enddayday && nowyear==enddayyear && nowmon == enddaymon && nowhours ==enddayhours && nowminute==enddayminute){
+          button(bongden, false)
+        }
+      }
+      
+      buttoncheck(address+bongden,"bong-den" )
+    }
+    else if(schedule[i].Type=="Maybom"){
+
+      
+      let endday = ""
+      if(schedule[i].EndDay != null){
+        endday = new Date(schedule[i].EndDay)
+      }
+
+      if(schedule[i].Minute != null){
+        endday = new Date(schedule[i].StartDay)
+        endday.setMinutes(endday.getMinutes()+schedule[i].Minute )
+      }
+      if (nowday == startdayday && nowyear==startdayyear && nowmon == startdaymon && nowhours ==startdayhours && nowminute==startdayminute){
+        button(maybom, true)
+      }
+      if(endday!=""){
+        enddayday = endday.getDate()
+        enddayyear = endday.getFullYear()
+        enddaymon = endday.getMonth()+1
+        enddayhours = endday.getHours()+1
+        enddayminute = endday.getMinutes()+1
+        if (nowday == enddayday && nowyear==enddayyear && nowmon == enddaymon && nowhours ==enddayhours && nowminute==enddayminute){
+          button(maybom, false)
+        }
+      }
+      
+      buttoncheck(address+maybom,"may-bom" )
+    }
+    else if(schedule[i].Type=="Quat"){
+
+      
+      let endday = ""
+      if(schedule[i].EndDay != null){
+        endday = new Date(schedule[i].EndDay)
+      }
+
+      if(schedule[i].Minute != null){
+        endday = new Date(schedule[i].StartDay)
+        endday.setMinutes(endday.getMinutes()+schedule[i].Minute )
+      }
+      if (nowday == startdayday && nowyear==startdayyear && nowmon == startdaymon && nowhours ==startdayhours && nowminute==startdayminute){
+        button(quat2, true)
+        fanspeech(address+ quat2, 2)
+      }
+      if(endday!=""){
+        enddayday = endday.getDate()
+        enddayyear = endday.getFullYear()
+        enddaymon = endday.getMonth()+1
+        enddayhours = endday.getHours()+1
+        enddayminute = endday.getMinutes()+1
+        if (nowday == enddayday && nowyear==enddayyear && nowmon == enddaymon && nowhours ==enddayhours && nowminute==enddayminute){
+          button(quat2, false)
+        }
+      }
+      
+      buttoncheck(address+quat2,"quat" )
+    }
+    else if(schedule[i].Type=="DieuHoa"){
+      
+      
+      let endday = ""
+      if(schedule[i].EndDay != null){
+        endday = new Date(schedule[i].EndDay)
+      }
+
+      if(schedule[i].Minute != null){
+        endday = new Date(schedule[i].StartDay)
+        endday.setMinutes(endday.getMinutes()+schedule[i].Minute )
+      }
+      if (nowday == startdayday && nowyear==startdayyear && nowmon == startdaymon && nowhours ==startdayhours && nowminute==startdayminute){
+        button(quat2, true)
+        button(maybom,true)
+        fanspeech(address+ quat2, 2)
+      }
+      if(endday!=""){
+        enddayday = endday.getDate()
+        enddayyear = endday.getFullYear()
+        enddaymon = endday.getMonth()+1
+        enddayhours = endday.getHours()+1
+        enddayminute = endday.getMinutes()+1
+        if (nowday == enddayday && nowyear==enddayyear && nowmon == enddaymon && nowhours ==enddayhours && nowminute==enddayminute){
+          button(quat2, false)
+          button(maybom,false)
+        }
+      }
+      
+      buttoncheck(address+quat2,"quat" )
+      buttoncheck(address+maybom,"may-bom" )
+    }
+  }
+}
+setInterval(function () {autocheck()}, 5000);
+

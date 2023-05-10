@@ -58,10 +58,10 @@ app.post("/", async function (req, res){
                 ID: req.body.username,
                 Key: req.body.key,
                 ListAPI: list
-              },
+              }, 
               { new: true }
             );
-        
+         
             if (!updatedserver) {
               res.status(404).send('User not found');
               return;

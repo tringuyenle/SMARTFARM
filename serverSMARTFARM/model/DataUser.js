@@ -6,6 +6,6 @@ const DataUserschema =mongoose.Schema({
     Password: String,
     Email: String,
     Description: String,
-})
+}) 
 
 module.exports = mongoose.model("DataUsers",DataUserschema)
