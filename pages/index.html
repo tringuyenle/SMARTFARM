@@ -123,7 +123,7 @@
                             <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="homepage.html" "><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li><a href="homepage.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -336,6 +336,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <button class="btn btn-info btn-sm" id="toggle-warn">Tắt Thông Báo</button>
+                                    <button class="btn btn-info btn-sm" onclick="togglePopUpPanel()">Ngưỡng Thông Báo</button>
                                     <div class="list-group" id ="list_Warn">
                                         <div>
                                         </div>
@@ -343,7 +344,73 @@
                                 </div>
                             </div>
                             <!-- /.panel -->
-
+                    <div class="panel-body" id="pop-up-panel">
+                        <h5>Thông Số Ngoài Các Khoảng Dưới Sẽ Kích Hoạt Thông Báo</h5>
+                        <div class="inp-ctn">
+                        </h6>Nhiệt Độ:</h6>
+                            <input type="number" min="0" max="150" class="fil"/>
+                            <input type="number" min="0" max="150" class="fil"/>
+                        </div>
+                        <div class="inp-ctn">
+                            </h6>Ánh Sáng:</h6>
+                            <input type="number" min="0" max="150" class="fil"/>
+                            <input type="number" min="0" max="150" class="fil"/>
+                        </div>
+                        <div class="inp-ctn">
+                            </h6>Độ Ẩm:</h6>
+                            <input type="number" min="0" max="150" class="fil"/>
+                            <input type="number" min="0" max="150" class="fil"/>
+                        </div>
+                        <div class="inp-ctn">
+                            </h6>Độ Ẩm Đất:</h6>
+                            <input type="number" min="0" max="150" class="fil"/>
+                            <input type="number" min="0" max="150" class="fil"/>
+                        </div>
+                        <h4 id="command-result"></h4>
+                        <div id="btn-ctn">
+                            <button onclick="togglePopUpPanel()">Đóng Cửa Sổ</button>
+                            <button onclick="updateThreshold()">Xác Nhận Thay Đổi</button>
+                        </div>
+                    </div>
+                    <style>
+                        #pop-up-panel {
+                            position:fixed;
+                            top:20%;
+                            left:30%;
+                            width:40%;
+                            min-width:150px;
+                            height:40%;
+                            min-height:200px;
+                            z-index:999;
+                            background-color:cadetblue;
+                            display:flex;
+                            justify-content: space-evenly;
+                            flex-direction: column;
+                            visibility: hidden;
+                        }
+                        #pop-up-panel input {
+                            width:4em;
+                        }
+                        #pop-up-panel > h3,h4,h5,h6 {
+                            text-align:center;
+                            margin:0;
+                            padding:0;
+                        }
+                        .inp-ctn {
+                            display: flex;
+                            justify-content: center;
+                        }
+                        .inp-ctn * {
+                            margin: 0 0.5em;
+                        }
+                        #btn-ctn {
+                            display: flex;
+                            justify-content: center;
+                        }
+                        #btn-ctn > button {
+                            margin: 0 0.5em;
+                        }
+                    </style>
         <!-- jQuery -->
         <script src="../js/jquery.min.js"></script>
 
@@ -362,6 +429,8 @@
         <script src="../js/startmin.js"></script>
         <script src="../js/adafruitio.js"></script>
 
+        <script src="../js/noti.js"></script>
+
         <script src="../js/auto.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -369,7 +438,6 @@
         <script src="../js/displayNote.js"></script>
 
         <script src="../js/displayWarning.js"></script>
-        <script src="../js/noti.js"></script>
         <script src="../js/threemode.js"></script>
         <script src="../js/login.js"></script>
         <script>
