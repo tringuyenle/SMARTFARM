@@ -58,40 +58,64 @@ function triggerMsg(msg, color) {
 }
 
 function beautifyStringDate(uglyDate) {
-    let arr = uglyDate.slice(0,uglyDate.length-4).split('T');
+    let arr = uglyDate.slice(0,uglyDate.length-1).split('T');
     return arr[1] + " " + arr[0];
 }
 
-function sendNotificationToScreen(mainMsg){
+function sendNotificationToScreen(mainMsg, mode = 1){
     if(!mainMsg || !mainMsg.length) {
         return;
     }
-
-    let msgArr = mainMsg.split('__');
     let list_Warn = document.getElementById("list_Warn");
 
-    var div = document.createElement("div")
-    div.className = "warning"
-    var a = document.createElement("a")
-    a.className = "list-group-item"
-    var i = document.createElement("i")
-    i.className="fa fa-warning fa-fw"
+    if(mode === 1) {
+        let msgArr = mainMsg.split('__');
     
-    var spanTB = document.createElement("span")
-    spanTB.innerHTML= " ID:" + msgArr[0] + "   " + msgArr[1];
-    var span = document.createElement("span")
-    span.className = "pull-right text-muted small"
 
+        var div = document.createElement("div")
+        div.className = "warning"
+        var a = document.createElement("a")
+        a.className = "list-group-item"
+        var i = document.createElement("i")
+        i.className="fa fa-warning fa-fw"
 
-    span.innerHTML = msgArr[2];
+        var spanTB = document.createElement("span")
+        spanTB.innerHTML= " ID:" + msgArr[0] + "   " + msgArr[1];
+        var span = document.createElement("span")
+        span.className = "pull-right text-muted small"
 
-    a.appendChild(i)
-    a.appendChild(spanTB)
-    a.appendChild(span)
-    
-    div.appendChild(a)
-    chill_List = list_Warn.children
-    lenChillList = chill_List.length
+        span.innerHTML = msgArr[2];
+
+        a.appendChild(i)
+        a.appendChild(spanTB)
+        a.appendChild(span)
+        div.appendChild(a)
+    }
+    else if(mode === 2) {
+        let msgArr = mainMsg.split('__');
+
+        var div = document.createElement("div")
+        div.className = "warning"
+        var a = document.createElement("a")
+        a.className = "list-group-item"
+        var i = document.createElement("i")
+        i.className="fa fa-warning fa-fw"
+
+        var spanTB = document.createElement("span")
+        spanTB.innerHTML= msgArr[0];
+        var span = document.createElement("span")
+        span.className = "pull-right text-muted small"
+
+        span.innerHTML = msgArr[1];
+
+        a.appendChild(i)
+        a.appendChild(spanTB)
+        a.appendChild(span)
+        div.appendChild(a)
+    }
+
+    // chill_List = list_Warn.children
+    // lenChillList = chill_List.length
 
     if(list_Warn.childElementCount > 4) {
         list_Warn.removeChild(list_Warn.lastElementChild); // clear list
@@ -116,6 +140,8 @@ async function getObjectDataFromServer(endpoint) {
 
 async function checkParamaterAndSendNoti() {
     let objectData = null;
+
+    await getNoteDataAndCheck();
 
     objectData = await getObjectDataFromServer('DataTemperatures')
     // objectData = {ID_Temperature_senser:"8113132",Value:"13",Status:"Failed",End_time:"6-9-1969"}
@@ -190,48 +216,80 @@ function generateMessagesFromObject(objectData, objectString) {
 
 //Note code
 async function getNoteDataAndCheck() {
-    // let resJSON = await getObjectDataFromServer('post-note');
-        let resJSON = {
-    Title: "dýdiaudiosaudosausdjasopda",
-    Summary: "đádasiiópioadiaopide7iqryỉuyw823457",
-    Content: "kdioafasdf9090er49orgsertgio590",
-    Time: "3910-232139-9-"
-};
+    let resJSON = await getObjectDataFromServer('post-note');
+//         let resJSON = {
+//     Title: "dýdiaudiosaudosausdjasopda",
+//     Summary: "đádasiiópioadiaopide7iqryỉuyw823457",
+//     Content: "kdioafasdf9090er49orgsertgio590",
+//     Time: "2023-05-10T21:15:20Z"
+// };
 
     if(!resJSON || !resJSON.Time || !resJSON.Time.length) {
         return;
     }
 
-    let noteNoti = document.createElement('div');
-    noteNoti.setAttribute("id", "note-warning");
-    noteNoti.innerHTML += '<div><h4 style="text-align:center;">Ghi Chú Đến Hạn</h4></div>'
+    let beuTime = beautifyStringDate(resJSON.Time);
+    let msg = `Ghi chú: ${resJSON.Title} đến hạn__${beuTime}`;
 
-    noteNoti.innerHTML +=  `<div><h5 style="text-align:center;">${resJSON.Title}</h5></div>`;
-
-     noteNoti.innerHTML +=  `<div><h5 style="text-align:center;">${resJSON.Time}</h5></div>`;
-
-    document.getElementsByTagName("body")[0].appendChild(noteNoti);
-
-    setTimeout(() => { 
-        let body = document.getElementsByTagName("body")[0];
-
-        while(body.lastElementChild.getAttribute('id') === "note-warning") {
-            body.removeChild(body.lastElementChild);
-        }
-    }, 2000)
+function addZero(i) {
+  if (i < 10) {i = "0" + i}
+  return i;
 }
 
-getNoteDataAndCheck();
+// https://www.w3schools.com/jsref/jsref_gethours.asp
+const d = new Date();
+let times1 = [];
+times1.push( ""+addZero(d.getHours()) );
+times1.push(  ""+addZero(d.getMinutes()) );
+times1.push(  ""+addZero(d.getSeconds()) );
+times1.push(  "" + addZero( d.getDate() ) );
+times1.push(  "" + addZero( d.getMonth()+1 ) );
+times1.push(  "" + d.getFullYear() );
+// https://www.w3schools.com/jsref/jsref_gethours.asp
+
+    let times2 = getFragmentDate( beuTime );
+
+    console.log(addZero(d.getMinutes()));
+    console.log(times1);
+    console.log(times2);
+
+    for(let i in times2) {
+        if(times1[i] !== times2[i]) {
+            return;
+        }
+    }
+
+    sendNotificationToScreen(msg,2);
+
+    // let noteNoti = document.createElement('div');
+    // noteNoti.setAttribute("id", "note-warning");
+    // noteNoti.innerHTML += '<div><h4 style="text-align:center;">Ghi Chú Đến Hạn</h4></div>'
+
+    // noteNoti.innerHTML +=  `<div><h5 style="text-align:center;">${resJSON.Title}</h5></div>`;
+
+    //  noteNoti.innerHTML +=  `<div><h5 style="text-align:center;">${resJSON.Time}</h5></div>`;
+
+    // document.getElementsByTagName("body")[0].appendChild(noteNoti);
+
+    // setTimeout(() => { 
+    //     let body = document.getElementsByTagName("body")[0];
+
+    //     while(body.lastElementChild.getAttribute('id') === "note-warning") {
+    //         body.removeChild(body.lastElementChild);
+    //     }
+    // }, 2000)
+}
+
 //Note code
 
 // Driver code
-var repeatTask1 = window.setInterval(checkParamaterAndSendNoti,2000);//2 giay cap nhat thong bao 1 lan
+var repeatTask1 = window.setInterval(checkParamaterAndSendNoti,1000);//2 giay cap nhat thong bao 1 lan
 var intervalSet = true;
 var togWarnBut = document.getElementById('toggle-warn');
 
 togWarnBut.addEventListener('click', () => {
     if(!window.intervalSet) {
-        window.repeatTask1 = window.setInterval(checkParamaterAndSendNoti,2000);//2 giay cap nhat thong bao 1 lan
+        window.repeatTask1 = window.setInterval(checkParamaterAndSendNoti,1000);//2 giay cap nhat thong bao 1 lan
         window.intervalSet = true;
         togWarnBut.innerText = 'Tắt Thông Báo';
     }
@@ -241,3 +299,8 @@ togWarnBut.addEventListener('click', () => {
         togWarnBut.innerText = 'Bật Thông Báo';
     }
 });
+
+function getFragmentDate(str) {
+    let time_date = str.split(' ');
+    return time_date[0].split(':').concat( time_date[1].split('-').reverse() );
+}
