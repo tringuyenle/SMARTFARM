@@ -41,7 +41,7 @@ async function updateData(url) {
   {fetch_api(url + "/anh-sang", "anh-sang"); 
   fetch_api(url + "/nhiet-do", "nhiet-do"); 
   fetch_api(url + "/do-am-khong-khi", "do-am-khong-khi"); 
-  fetch_api(url + "/do-am-dat", "do-am-dat");}, 5000);
+  fetch_api(url + "/do-am-dat", "do-am-dat");}, 1000);
 }
 
 async function button(feed, status) {
@@ -51,7 +51,7 @@ async function button(feed, status) {
   fetch("https://io.adafruit.com/api/v2/tringuyennek/feeds/" + feed + "/data", {
   method: 'POST',
   headers: {
-      'X-AIO-Key': "aio_dlOk274ZEfjB65xlGg88XLPrI9N8",
+      'X-AIO-Key': "aio_vDOg33Soh9BqYyqHCm96HbtwdCwi",
       'Content-Type': 'application/json'
   },
   body: JSON.stringify({value: status,})
