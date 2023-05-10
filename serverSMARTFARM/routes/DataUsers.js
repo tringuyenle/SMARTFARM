@@ -33,7 +33,7 @@ app.post('/',function (req, res){
                                 //         content: 'Chua nhap day du'
                                 //     });
                                 datauser.save()
-                                res.redirect('../../client/pages/login.html');
+                                res.redirect('../../pages/login.html');
                         }
                 }
 
@@ -65,7 +65,7 @@ app.post("/update", async function (req, res){
                   return;
                 }
             
-                res.redirect('../../client/pages/profile.html');
+                res.redirect('../../pages/profile.html');
               } catch (err) {
                 console.error(err);
                 res.status(500).send('Internal server error');

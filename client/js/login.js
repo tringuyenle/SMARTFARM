@@ -14,7 +14,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
 
         if (user) {
             sessionStorage.setItem('user', JSON.stringify(user));
-        window.location.href = 'http://localhost:3000/client/pages/index.html';
+        window.location.href = 'http://localhost:3000/pages/index.html';
         } else {
         alert('Invalid username or password.');
         }

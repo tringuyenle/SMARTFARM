@@ -1,8 +1,8 @@
 const mongoose =require("mongoose")
 
 const DataServerschema =mongoose.Schema({
-    ID_Server: String,
     Address: String,
+    ListAPI: [Object],
 })
 
 module.exports = mongoose.model("DataServers",DataServerschema)
