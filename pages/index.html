@@ -8,15 +8,11 @@
         <meta name="author" content="">
 
         <title>Smart Farm</title>
-        <style>
-        	#fanspeech {
-        		margin-left:3px;
-        	}
-        </style>
         <link rel="shortcut icon" type="image/png" href="../image/pngwing.com.png"/>
 
         <!-- Bootstrap Core CSS -->
-        <link href="../css/bootstrap.min.css" rel="stylesheet">       
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/trung.css" rel="stylesheet">
 
         <!-- MetisMenu CSS -->
         <link href="../css/metisMenu.min.css" rel="stylesheet">
@@ -449,7 +445,7 @@
                                 </div>
                             </div>
                             <!-- /.panel -->
-                    <div class="panel-body" id="pop-up-panel">
+                    <div class="panel panel-default" id="pop-up-panel">
                         <h5>Thông Số Ngoài Các Khoảng Dưới Sẽ Kích Hoạt Thông Báo</h5>
                         <div class="inp-ctn">
                         </h6>Nhiệt Độ:</h6>
@@ -473,49 +469,11 @@
                         </div>
                         <h4 id="command-result"></h4>
                         <div id="btn-ctn">
-                            <button onclick="togglePopUpPanel()">Đóng Cửa Sổ</button>
-                            <button onclick="updateThreshold()">Xác Nhận Thay Đổi</button>
+                            <button class="btn btn-danger" onclick="togglePopUpPanel()">Đóng Cửa Sổ</button>
+                            <button class="btn btn-success" onclick="updateThreshold()">Xác Nhận Thay Đổi</button>
                         </div>
                     </div>
-                    <style>
-                        #pop-up-panel {
-                            position:fixed;
-                            top:20%;
-                            left:30%;
-                            width:40%;
-                            min-width:150px;
-                            height:40%;
-                            min-height:200px;
-                            z-index:999;
-                            background-color:cadetblue;
-                            display:flex;
-                            justify-content: space-evenly;
-                            flex-direction: column;
-                            visibility: hidden;
-                        }
-                        #pop-up-panel input {
-                            width:4em;
-                        }
-                        #pop-up-panel > h3,h4,h5,h6 {
-                            text-align:center;
-                            margin:0;
-                            padding:0;
-                        }
-                        .inp-ctn {
-                            display: flex;
-                            justify-content: center;
-                        }
-                        .inp-ctn * {
-                            margin: 0 0.5em;
-                        }
-                        #btn-ctn {
-                            display: flex;
-                            justify-content: center;
-                        }
-                        #btn-ctn > button {
-                            margin: 0 0.5em;
-                        }
-                    </style>
+              
         <!-- jQuery -->
         <script src="../js/jquery.min.js"></script>
 
