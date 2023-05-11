@@ -9,4 +9,4 @@ $ git clone <link project>
     $ npm start
     ## Open local localhost:3000
 # Auto update Adafruit
-    ## Open file AutoUpdateAdafruit.py and Run 
+    ## Open file AutoUpdateAdafruit.py in fakedata folder and Run 
