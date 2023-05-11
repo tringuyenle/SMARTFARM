@@ -76,7 +76,7 @@ async function getDataHumidity(){
     
     
 }
-setInterval(function () {getDataHumidity()}, 1000);
+setInterval(function () {getDataHumidity()}, 10000);
 //getDataHumidity()
 
 module.exports = router;

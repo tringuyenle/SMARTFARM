@@ -64,7 +64,7 @@ async function getDatalight(){
     
     
 }
-setInterval(function () {getDatalight()}, 1000);
+setInterval(function () {getDatalight()}, 10000);
 //getDatalight()
 
 module.exports = router;

@@ -74,6 +74,6 @@ async function getDataSoilmoisture(){
     
 }
 setInterval(function () {getDataSoilmoisture()
-}, 1000);
+}, 10000);
 
 module.exports = router;

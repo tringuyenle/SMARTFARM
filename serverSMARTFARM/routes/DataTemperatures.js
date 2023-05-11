@@ -72,7 +72,7 @@ async function getDataTemperature(){
     
     
 }
-setInterval(function () {getDataTemperature()}, 1000);
+setInterval(function () {getDataTemperature()}, 10000);
 
 
 module.exports = router;
