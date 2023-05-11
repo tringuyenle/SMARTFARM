@@ -2,7 +2,7 @@ minLight = 10
 maxLight = 100
 
 minHum = 10
-maxHum = 50
+maxHum = 80
 
 minTem = 15
 maxTem = 40
@@ -106,7 +106,7 @@ async function displayWarn(){
         addchill(listWarn, listHumidity[lengthlistHumidity-1].End_time, "vượt ngưỡng", "Độ ẩm không khí")
     }
     if(listSoilmoisture[lengthlistSoilmoisture-1].Value <= minSoi){
-        addchill(listWarn, listSoilmoisture[lengthlistSoilmoisture-1].End_time, "vượt ngưỡng", "Độ ẩm đất")
+        addchill(listWarn, listSoilmoisture[lengthlistSoilmoisture-1].End_time, "dưới ngưỡng", "Độ ẩm đất")
     }
     if(listSoilmoisture[lengthlistSoilmoisture-1].Value >= maxSoi){
         addchill(listWarn, listSoilmoisture[lengthlistSoilmoisture-1].End_time, "vượt ngưỡng", "Độ ẩm đất")

@@ -1,3 +1,15 @@
+// async function first() {
+// let resJSON = await getObjectDataFromServer('post-note/DataNotes');
+
+//     let beuTime = resJSON.Time.split('T');
+//     let msg = ` ${resJSON.Title}__${beuTime[1] + " " + beuTime[0]}`;
+
+
+//         sendNotificationToScreen(msg,2);
+// }
+
+// window.onload = first();
+
 var TEMPERATURE_THRESHOLD = [15,35],
     SOIL_MOIST_THRESHOLD = [10,50],
     HUMIDITY_THRESHOLD = [10,50];
@@ -117,9 +129,9 @@ function sendNotificationToScreen(mainMsg, mode = 1){
     // chill_List = list_Warn.children
     // lenChillList = chill_List.length
 
-    if(list_Warn.childElementCount > 4) {
-        list_Warn.removeChild(list_Warn.lastElementChild); // clear list
-    }
+    // if(list_Warn.childElementCount > 4) {
+    //     list_Warn.removeChild(list_Warn.lastElementChild); // clear list
+    // }
 
     if(list_Warn.childElementCount === 0) {
         list_Warn.appendChild(div);
@@ -143,20 +155,20 @@ async function checkParamaterAndSendNoti() {
 
     await getNoteDataAndCheck();
 
-    objectData = await getObjectDataFromServer('DataTemperatures')
-    // objectData = {ID_Temperature_senser:"8113132",Value:"13",Status:"Failed",End_time:"6-9-1969"}
-    sendNotificationToScreen( generateMessagesFromObject(objectData, 'Temperature') );
+    // objectData = await getObjectDataFromServer('DataTemperatures')
+    // // objectData = {ID_Temperature_senser:"8113132",Value:"13",Status:"Failed",End_time:"6-9-1969"}
+    // sendNotificationToScreen( generateMessagesFromObject(objectData, 'Temperature') );
 
-    objectData = await getObjectDataFromServer('DataHumiditys')
-    // objectData = {ID_Humidity_senser:"8091832",Value:"69",Status:"OK",End_time:"6-9-1996"}
-    sendNotificationToScreen( generateMessagesFromObject(objectData, 'Humidity') );
+    // objectData = await getObjectDataFromServer('DataHumiditys')
+    // // objectData = {ID_Humidity_senser:"8091832",Value:"69",Status:"OK",End_time:"6-9-1996"}
+    // sendNotificationToScreen( generateMessagesFromObject(objectData, 'Humidity') );
 
-    // objectData = await getObjectDataFromServer('DataSoilmoistures');
-    // sendNotificationToScreen( generateMessagesFromObject(objectData, 'Soilmoisture') );
+    // // objectData = await getObjectDataFromServer('DataSoilmoistures');
+    // // sendNotificationToScreen( generateMessagesFromObject(objectData, 'Soilmoisture') );
 
-    objectData = await getObjectDataFromServer('Datalights');
-    // objectData = {ID_Light_senser:"814141832",Value:"0",Status:"OK",End_time:"6-9-1966"}
-    sendNotificationToScreen( generateMessagesFromObject(objectData, 'Light') );
+    // objectData = await getObjectDataFromServer('Datalights');
+    // // objectData = {ID_Light_senser:"814141832",Value:"0",Status:"OK",End_time:"6-9-1966"}
+    // sendNotificationToScreen( generateMessagesFromObject(objectData, 'Light') );
 }
 
 
@@ -216,7 +228,7 @@ function generateMessagesFromObject(objectData, objectString) {
 
 //Note code
 async function getNoteDataAndCheck() {
-    let resJSON = await getObjectDataFromServer('post-note');
+    let resJSON = await getObjectDataFromServer('post-note/DataNotes');
 //         let resJSON = {
 //     Title: "dýdiaudiosaudosausdjasopda",
 //     Summary: "đádasiiópioadiaopide7iqryỉuyw823457",
@@ -228,26 +240,30 @@ async function getNoteDataAndCheck() {
         return;
     }
 
-    let beuTime = beautifyStringDate(resJSON.Time);
-    let msg = `Ghi chú: ${resJSON.Title} đến hạn__${beuTime}`;
+    let beuTime = resJSON.Time.split('T');
+    let msg = ` ${resJSON.Title}__${beuTime[1] + " " + beuTime[0]}`;
 
 function addZero(i) {
   if (i < 10) {i = "0" + i}
   return i;
 }
 
+function getFragmentDateNote(str) {
+    let time_date = str.split('T');
+    return time_date[1].split(':').concat( time_date[0].split('-').reverse() );
+  }
+
 // https://www.w3schools.com/jsref/jsref_gethours.asp
 const d = new Date();
 let times1 = [];
 times1.push( ""+addZero(d.getHours()) );
 times1.push(  ""+addZero(d.getMinutes()) );
-times1.push(  ""+addZero(d.getSeconds()) );
 times1.push(  "" + addZero( d.getDate() ) );
 times1.push(  "" + addZero( d.getMonth()+1 ) );
 times1.push(  "" + d.getFullYear() );
 // https://www.w3schools.com/jsref/jsref_gethours.asp
 
-    let times2 = getFragmentDate( beuTime );
+    let times2 = getFragmentDateNote( resJSON.Time );
 
     console.log(addZero(d.getMinutes()));
     console.log(times1);
@@ -259,7 +275,9 @@ times1.push(  "" + d.getFullYear() );
         }
     }
 
-    sendNotificationToScreen(msg,2);
+    if(d.getSeconds() < 1) {
+        sendNotificationToScreen(msg,2);
+    }
 
     // let noteNoti = document.createElement('div');
     // noteNoti.setAttribute("id", "note-warning");
@@ -299,8 +317,3 @@ togWarnBut.addEventListener('click', () => {
         togWarnBut.innerText = 'Bật Thông Báo';
     }
 });
-
-function getFragmentDate(str) {
-    let time_date = str.split(' ');
-    return time_date[0].split(':').concat( time_date[1].split('-').reverse() );
-}
